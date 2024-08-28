@@ -1,0 +1,10 @@
+
+:root{
+    --bg_card_gradient: linear-gradient(to bottom right, #ae2727, #cf3333, #000000, #000000);
+    --borders: #f6abab;
+    --dark_red: #cf3333;
+    --dark_red_light: #cf3333af;
+    --text: #fdf3f3;
+    --input: #374043;
+    --black: #000000;
+}

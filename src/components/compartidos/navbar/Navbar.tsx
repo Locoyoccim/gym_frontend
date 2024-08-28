@@ -1,0 +1,38 @@
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "./navbar.css";
+import navImg from "/muscle-arm-svgrepo-com.svg";
+import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+
+function Navbar() {
+  const [navState, setNavState] = useState("");
+  const {id_user} = useParams()
+  
+  const navButton = (newState: string) => {
+    setNavState(newState);
+  };
+
+  return (
+    <div className="navbar_container">
+      <button>
+        <img src={navImg} alt="nav_img" />
+      </button>
+      <button className="hamburguer_btn" onClick={() => navButton("open")}>
+        <i className="bi bi-list"></i>
+      </button>
+      <nav className={`nav ${navState}`}>
+        <ul>
+          <button className="close_btn" onClick={() => navButton("")}>
+            <i className="bi bi-x-circle"></i>
+          </button>
+
+          <li>Otras Rutinas</li>
+          <li> <Link to={`/dashboard/${id_user}`}>Inicio</Link></li>
+          <li><Link to={`/profile/${id_user}`}> Mi Perfil</Link></li>
+        </ul>
+      </nav>
+    </div>
+  );
+}
+
+export default Navbar;

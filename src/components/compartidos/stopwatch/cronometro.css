@@ -1,0 +1,6 @@
+@import url('./src/components/compartidos/colors.css');
+
+.timer{
+    color: var(--text);
+    font-size: 22px;
+}

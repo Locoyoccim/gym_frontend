@@ -1,0 +1,41 @@
+@import url("./src/components/compartidos/colors.css");
+.profile_container {
+  background: var(--bg_card_gradient);
+  height: 78vh;
+  width: 90%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+}
+.profile_img_container {
+  width: 100%;
+  text-align: center;
+}
+.profile_container h3 {
+  color: var(--text);
+  font-size: 33px;
+}
+.bi-person-circle {
+  color: var(--text);
+  font-size: 90px;
+}
+.user_data {
+  padding: 30px 40px;
+  display: grid;
+  gap: 20px;
+}
+.data {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text);
+  font-size: 23px;
+  height: max-content;
+}
+.data p{
+  text-transform: uppercase;
+}
+.data span{
+  text-transform: capitalize;
+}

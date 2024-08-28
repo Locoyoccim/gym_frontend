@@ -1,0 +1,12 @@
+.inputs_container{
+    width: auto;
+    display: flex;
+    row-gap: 15px;
+    z-index: 3;
+}
+.inputs_container input{
+    margin-right: 8px;
+    margin-top: 8px;
+    width: 50px;
+    height: 40px;
+}

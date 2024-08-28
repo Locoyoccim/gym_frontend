@@ -1,0 +1,7 @@
+#results_details {
+  display: flex;
+  margin-left: 5px;
+}
+.fecha{
+  width: 115px;
+}

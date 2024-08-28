@@ -1,0 +1,143 @@
+#singIn_container {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+}
+.move {
+  transform: translateX(-415px);
+}
+#login_section {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+.singin_container,
+.createAcount_container {
+  color: var(--text);
+  background: var(--bg_card_gradient);
+  width: 85%;
+  max-height: 630px;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+}
+.bi-house-heart,
+.bi-door-open {
+  font-size: 66px;
+}
+.show_password {
+  background: none;
+  border: none;
+  width: max-content;
+  position: absolute;
+  transform: translate(-45px, 2px);
+  transition: all 0.5s ease-in-out;
+  overflow: hidden;
+}
+.show_password::after {
+  position: absolute;
+  content: "";
+  height: 4px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: var(--text);
+  transform: rotate(45deg);
+  left: -35px;
+  top: -15px;
+  transition: all 0.3s ease-in-out;
+}
+.show_password.animation_in::after {
+  left: -2px;
+  top: 18px;
+  transition: all 0.3s ease-in-out;
+}
+.bi-eye-fill {
+  color: var(--text);
+  font-size: 35px;
+}
+.form_container,
+.create_acount_form {
+  width: 100%;
+  padding: 0 5%;
+}
+.form_container label,
+.singin_buttons,
+.create_acount_form label {
+  display: grid;
+  flex-direction: column;
+  text-align: center;
+  font-size: 24px;
+}
+.form_container label,
+.create_acount_form label {
+  margin: 15px 0 5px 0;
+  text-transform: uppercase;
+}
+.form_container input,
+.create_acount_form input {
+  border-radius: 5px;
+  height: 45px;
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+}
+.singin_buttons {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+}
+.login {
+  background: var(--dark_red);
+  border: none;
+  color: var(--text);
+  height: 40px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 5px 10px;
+}
+.create_acount_btn {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 10px;
+  height: 25px;
+}
+.createAcount_container {
+  position: absolute;
+  right: -390px;
+  top: 25px;
+  max-height: 92%;
+  transition: all 1s ease;
+  overflow: scroll;
+}
+.createAcount_container::-webkit-scrollbar {
+  display: none;
+}
+.createAcount_container.in {
+  right: 18px;
+  width: 90%;
+  transition: all 1s ease;
+}
+/* Manejo de errores en inputs */
+.email_msj,
+.password_msj,
+.confirmation_msj {
+  width: 100%;
+  height: 0;
+  font-size: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: all 0.7s ease;
+}
+.email_msj.invalidEmail,
+.confirmation_msj.false {
+  height: 40px;
+  transition: all 0.7s ease;
+}
+.password_msj.invalidPassword {
+  height: 90px;
+  transition: all 0.7s ease;
+}

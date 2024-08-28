@@ -1,0 +1,9 @@
+.results{
+    display: flex;
+    justify-content: space-around;
+    color: var(--text);
+    text-align: center;
+}
+.results p{
+    width: 32px;
+}

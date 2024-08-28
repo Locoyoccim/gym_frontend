@@ -1,0 +1,32 @@
+@import url('./src/components/compartidos/colors.css');
+
+.footer{
+    display: flex;
+    background: var(--dark_red_light);
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    border: solid 1px var(--borders);
+    height: 60px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-top: 70px;
+    overflow: hidden;
+}
+.footer button{
+    width: 90px;
+    height: 35px;
+    padding: 5px 10px;
+    background: var(--dark_red);
+    border: none;
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 14px;
+    cursor: pointer;
+}
+.timmer{
+    color: var(--text);
+    font-size: 20px;
+
+}

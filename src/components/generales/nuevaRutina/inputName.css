@@ -1,0 +1,85 @@
+@import url("./src/components/compartidos/colors.css");
+.exercise_name {
+  height: max-content;
+  width: 100%;
+  margin-bottom: 25px;
+  position: relative;
+}
+.exercise_name input {
+  width: 100%;
+  height: 55px;
+  padding-left: 20px;
+}
+input {
+  background: var(--dark_red_light);
+  color: var(--text);
+  border: 2px solid var(--borders);
+  border-radius: 10px;
+  font-size: 18px;
+  outline: none;
+  color: var(--text);
+  z-index: -1;
+}
+.results_container {
+  position: relative;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.remove_line i {
+  right: 15px;
+  top: 50px;
+}
+.icon_results {
+  right: 15px;
+  top: 10px;
+}
+.titles {
+  color: var(--text);
+}
+.nueva_rutina_btn,
+.remove_line {
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+}
+.titles,
+.results_container {
+  display: flex;
+  width: 100%;
+}
+.results_container input {
+  width: 50px;
+  height: 40px;
+  text-align: center;
+}
+.titles p {
+  width: 50px;
+  text-align: center;
+  margin-right: 7px;
+}
+.exercise_list {
+  border: var(--borders) 0px solid;
+  position: absolute;
+  width: 100%;
+  height: 0;
+  margin-top: 10px;
+  color: var(--text);
+  text-align: center;
+  font-size: 25px;
+  background-color: var(--dark_red_light);
+  z-index: 4;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.5s ease all;
+}
+.exercise_list.display {
+  height: 150px;
+  transition: 0.5s ease all;
+  overflow-y: scroll;
+}
+.exercise_list p {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid var(--text);
+}

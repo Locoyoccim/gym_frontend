@@ -1,0 +1,48 @@
+@import url("./src/components/compartidos/colors.css");
+#Exercise_display {
+  width: 100%;
+  padding: 0 30px;
+  margin-bottom: 15px;
+}
+.card_results {
+  padding: 10px;
+  background-color: var(--dark_red_light);
+  border-radius: 15px;
+  height: 55px;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+.card_results.extend{
+  height: 170px;
+  transition: all 0.5s ease;
+}
+.tittle_card {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.results_details {
+  display: flex;
+  justify-content: space-around;
+  color: var(--text);
+  text-transform: uppercase;
+  text-align: center;
+}
+.results_details p {
+  width: 32px;
+}
+
+.card_name {
+  color: var(--text);
+}
+.arrow_btn {
+  border: none;
+  background: none;
+  font-size: 28px;
+  cursor: pointer;
+  transition: all .8s ease;
+}
+.arrow_btn.turn{
+  transform: rotate(-180deg);
+  transition: all .8s ease-in-out;
+}

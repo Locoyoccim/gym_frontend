@@ -1,0 +1,58 @@
+@import url("./src/components/compartidos/colors.css");
+.navbar_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 0 30px;
+  z-index: 4;
+  height: 80px;
+}
+.nav {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 0;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  background: var(--bg_card_gradient);
+  z-index: 3;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+.nav.open {
+  height: 300px;
+  transition: all 0.5s ease;
+}
+.nav ul {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  gap: 15px;
+  position: relative;
+}
+.navbar_container button {
+  border: none;
+  background: none;
+  color: var(--dark_red);
+  font-size: 40px;
+  margin: 0;
+  padding: 0;
+}
+.navbar_container .close_btn {
+  color: var(--text);
+  position: absolute;
+  right: calc(0px + 30px);
+  top: calc(0px + 20px);
+}
+.navbar_container img {
+  width: 50px;
+}
+.nav li {
+  list-style: none;
+  color: var(--text);
+}
