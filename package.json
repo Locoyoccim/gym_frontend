@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start": "serve -s build",
-    "deplot": "npm run build"
+    "deploy": "npm run build"
   },
   "dependencies": {
     "bootstrap-icons": "^1.11.3",
