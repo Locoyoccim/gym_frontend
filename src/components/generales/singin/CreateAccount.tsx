@@ -77,7 +77,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
   // envio de datos del usuario al Backend
   const SendDataBackEnd = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/rutinas/crear-usuario/", {
+      const response = await fetch("https://gymbackend-production.up.railway.app/rutinas/crear-usuario/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

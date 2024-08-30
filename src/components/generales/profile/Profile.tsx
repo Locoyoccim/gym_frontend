@@ -28,7 +28,7 @@ function Profile() {
     try {
       const jwt = localStorage.getItem('token')
       const response = await fetch(
-        `http://127.0.0.1:8000/rutinas/userinfo/${id_user}/`, {
+        `https://gymbackend-production.up.railway.app/rutinas/userinfo/${id_user}/`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${jwt}`,

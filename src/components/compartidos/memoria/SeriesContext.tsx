@@ -25,7 +25,7 @@ function SeriesContext({ children }: SerieData) {
   const jwt = localStorage.getItem('token')
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/rutinas/series/", {
+    fetch("https://gymbackend-production.up.railway.app/rutinas/series/", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${jwt}`,

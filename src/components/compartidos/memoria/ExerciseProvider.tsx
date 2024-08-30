@@ -16,7 +16,7 @@ function ExerciseProvider({ children }: children) {
   const jwt = localStorage.getItem("token");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/rutinas/ejercicios_list/", {
+    fetch("https://gymbackend-production.up.railway.app/rutinas/ejercicios_list/", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${jwt}`,

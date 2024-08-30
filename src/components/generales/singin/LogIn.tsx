@@ -35,7 +35,7 @@ function SingIn({ windowChange }: Props) {
   const SendDataBackEnd = async () => {
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/rutinas/log-in/",
+        "https://gymbackend-production.up.railway.app/rutinas/log-in/",
         {
           method: "POST",
           headers: {
