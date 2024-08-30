@@ -90,12 +90,14 @@ function NuevaRutina() {
   // Envia datos al Backend
 
   const sendToBackend = async () => {
+    const jwt = localStorage.getItem('token')
     setLoading(true);
     try {
       const response = await fetch("https://gymbackend-production.up.railway.app/rutinas/series/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`,
         },
         body: JSON.stringify(userExercise),
       });
