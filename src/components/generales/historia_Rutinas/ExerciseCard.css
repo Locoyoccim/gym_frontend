@@ -20,8 +20,7 @@
 }
 .tittle_card {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  justify-content: space-between;
   margin-bottom: 15px;
 }
 .results_details {
@@ -45,8 +44,9 @@
   cursor: pointer;
   transition: all .8s ease;
   color: var(--text);
+  transform: rotate(180deg);
 }
 .arrow_btn.turn{
-  transform: rotate(-180deg);
   transition: all .8s ease-in-out;
+  transform: rotate(-360deg);
 }

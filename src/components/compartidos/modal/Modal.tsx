@@ -70,12 +70,13 @@ function Modal({ modalState, setShowModal }: ModalProps) {
       <form action="search" id="search_form">
         <input
           type="text"
-          placeholder="ejercicio"
+          placeholder="ejercicio..."
           className="check_exercise"
           onChange={(e) => getExerciseName(e, ExerciseData)}
           value={inputValue}
+          name="exeercice_name"
         />
-        <button id="clear_btn" onClick={(e) => {e.preventDefault() ,setInputValue('')}}>
+        <button type="button" id="clear_btn" onClick={(e) => {e.preventDefault() ,setInputValue('')}}>
           <i className="bi bi-x-octagon-fill"></i>
         </button>
       </form>
@@ -100,8 +101,8 @@ function Modal({ modalState, setShowModal }: ModalProps) {
           <p className="result">rir</p>
         </div>
         <div className="result_container">
-          {exercise_history.map((item) => (
-            <ModalResult fecha={item.fecha} series={item.series} />
+          {exercise_history.map((item, index) => (
+            <ModalResult key={index} fecha={item.fecha} series={item.series} />
           ))}
         </div>
       </section>

@@ -9,6 +9,8 @@
   width: 100%;
   height: 55px;
   padding-left: 20px;
+  text-transform: capitalize;
+  font-size: 20px;
 }
 input {
   background: var(--dark_red_light);
@@ -72,6 +74,7 @@ input {
   border-radius: 10px;
   overflow: hidden;
   transition: 0.5s ease all;
+  text-transform: uppercase;
 }
 .exercise_list.display {
   height: 150px;

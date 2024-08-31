@@ -52,7 +52,8 @@
 .navbar_container img {
   width: 50px;
 }
-.nav li {
+.nav li, button.log_out {
   list-style: none;
   color: var(--text);
+  font-size: 20px;
 }
