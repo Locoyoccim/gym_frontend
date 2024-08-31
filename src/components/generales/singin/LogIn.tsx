@@ -15,6 +15,7 @@ interface userData {
 function SingIn({ windowChange }: Props) {
   const { Login } = useAuth();
   const navigate = useNavigate();
+  const [Loader, setLoder] = useState<Boolean>(false);
   const [inputType, setInputType] = useState<string>("password");
   const [eyeAnimation, setEyeAnitmation] = useState<string>("");
   const [SingInData, SetSingInData] = useState<userData>({
@@ -34,6 +35,7 @@ function SingIn({ windowChange }: Props) {
 
   const SendDataBackEnd = async () => {
     try {
+      setLoder(true)
       const response = await fetch(
         "https://gymbackend-production.up.railway.app/rutinas/log-in/",
         {
@@ -52,6 +54,7 @@ function SingIn({ windowChange }: Props) {
       return navigate(`/dashboard/${id_user}`);
     } catch {
       console.error("Error al enviar informacion:", Error);
+      setLoder(false)
     }
   };
 
@@ -70,17 +73,26 @@ function SingIn({ windowChange }: Props) {
               id="email"
               autoComplete="name"
               onChange={(e) => InputData(e, "email")}
+              name="email"
+              aria-required="true"
+              aria-label="Correo electrónico"
+              required
             />
             <label htmlFor="password">contraseña</label>
             <input
               type={inputType}
+              name="password"
               id="password"
-              autoComplete="new-password"
+              autoComplete="current-password"
               onChange={(e) => InputData(e, "password")}
+              aria-required="true"
+              aria-label="Contraseña"
+              required
             />
             <button
               className={`show_password ${eyeAnimation}`}
               onClick={(e) => changeType(e)}
+              type="button"
             >
               <i className="bi bi-eye-fill"></i>
             </button>
@@ -88,7 +100,7 @@ function SingIn({ windowChange }: Props) {
         </div>
         <div className="singin_buttons">
           <button className="login" onClick={SendDataBackEnd}>
-            INICIAR SESION
+            {!Loader ? <p>INICIAR SESION</p> : <div className="loader"></div>}
           </button>
           <button
             className="create_acount_btn"

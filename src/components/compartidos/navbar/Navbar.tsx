@@ -3,11 +3,13 @@ import "./navbar.css";
 import navImg from "/muscle-arm-svgrepo-com.svg";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useAuth } from "../memoria/AuthProvider";
 
 function Navbar() {
   const [navState, setNavState] = useState("");
-  const {id_user} = useParams()
-  
+  const { id_user } = useParams();
+  const { Logout } = useAuth();
+
   const navButton = (newState: string) => {
     setNavState(newState);
   };
@@ -27,8 +29,17 @@ function Navbar() {
           </button>
 
           <li>Otras Rutinas</li>
-          <li> <Link to={`/dashboard/${id_user}`}>Inicio</Link></li>
-          <li><Link to={`/profile/${id_user}`}> Mi Perfil</Link></li>
+          <li>
+            <Link to={`/dashboard/${id_user}`}>Inicio</Link>
+          </li>
+          <li>
+            <Link to={`/profile/${id_user}`}> Mi Perfil</Link>
+          </li>
+          <li>
+            <button className="log_out" onClick={() => Logout()}>
+              Cerrar Sesion
+            </button>
+          </li>
         </ul>
       </nav>
     </div>

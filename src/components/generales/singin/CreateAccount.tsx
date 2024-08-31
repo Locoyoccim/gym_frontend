@@ -77,18 +77,21 @@ function CreateAccount({ windowChange, windowState }: Props) {
   // envio de datos del usuario al Backend
   const SendDataBackEnd = async () => {
     try {
-      const response = await fetch("https://gymbackend-production.up.railway.app/rutinas/crear-usuario/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        "https://gymbackend-production.up.railway.app/rutinas/crear-usuario/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
       if (!response.ok) throw new Error("Error en la solicitud");
       const result = await response.json();
       console.log("Datos enviados Exitosamente", result);
-      Login(result.access)
-      const id_user = result.id
+      Login(result.access);
+      const id_user = result.id;
       return navigate(`/userRegistration/${id_user}`);
     } catch {
       console.error("Error al enviar informacion:", Error);
@@ -104,7 +107,9 @@ function CreateAccount({ windowChange, windowState }: Props) {
         </div>
         <form className="create_acount_form">
           {/* captura correo */}
-          <label htmlFor="create_user">correo electronico</label>
+          <label htmlFor="get_email">
+            correo electronico
+          </label>
           <input
             type="email"
             id="get_email"

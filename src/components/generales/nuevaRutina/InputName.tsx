@@ -121,6 +121,7 @@ function InputName({ index, getInputValues }: getInputValues) {
           }}
         />
         <div className={`exercise_list ${exerciseList}`}>
+          {/* Regresa lista de ejercicios traida del BE */}
           {filterExerciseData.map((item) => (
             <p
               key={item.id}

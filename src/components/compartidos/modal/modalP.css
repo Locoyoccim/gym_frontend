@@ -1,5 +1,7 @@
 #result_displyer{
     display: flex;
     gap: 15px;
-    margin-left: 15px;
+    width: 100%;
+    justify-content: space-evenly;
+    margin: 0 10px 0 15px;
 }

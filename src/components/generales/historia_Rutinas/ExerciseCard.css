@@ -8,13 +8,15 @@
   padding: 10px;
   background-color: var(--dark_red_light);
   border-radius: 15px;
-  height: 55px;
+  max-height: 55px;
   overflow: hidden;
   transition: all 0.5s ease;
 }
 .card_results.extend{
-  height: 170px;
+  max-height: 220px;
   transition: all 0.5s ease;
+  overflow: scroll;
+  scrollbar-width: none;
 }
 .tittle_card {
   display: flex;
@@ -29,11 +31,11 @@
   text-align: center;
 }
 .results_details p {
-  width: 32px;
+  width: 45px;
 }
-
 .card_name {
   color: var(--text);
+  text-transform: uppercase;
 }
 .arrow_btn {
   border: none;
@@ -41,8 +43,10 @@
   font-size: 28px;
   cursor: pointer;
   transition: all .8s ease;
+  color: var(--text);
+  transform: rotate(180deg);
 }
 .arrow_btn.turn{
-  transform: rotate(-180deg);
   transition: all .8s ease-in-out;
+  transform: rotate(-360deg);
 }
