@@ -2,6 +2,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "../userInfoForm/userInfo.css";
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useState } from "react";
+import BtnLoader from "../../compartidos/Loader/BtnLoader";
 
 interface dataProps {
   id_user: number;
@@ -25,6 +26,7 @@ const getCurrentDate = (): string => {
 
 function UserInfo() {
   const { id_user } = useParams<{id_user: string}>() 
+  const [Loading, setLoagin] = useState<Boolean>(false)
   const navigate = useNavigate()
   const [userData, setUserData] = useState<dataProps>(
     {
@@ -46,6 +48,7 @@ function UserInfo() {
 
   const SendtoBackEnd = async () =>{
     try {
+      setLoagin(true)
       const response = await fetch("https://gymbackend-production.up.railway.app/rutinas/newuserinfo/", {
         method: "POST",
         headers: {
@@ -56,9 +59,11 @@ function UserInfo() {
       if (!response.ok) throw new Error("Error en la solicitud");
       const result = await response.json();
       console.log("Datos enviados Exitosamente", result);
+      setLoagin(false)
       return navigate('/');
     } catch {
       console.error("Error al enviar informacion:", Error);
+      setLoagin(false)
     }
   }
 
@@ -102,7 +107,9 @@ function UserInfo() {
             onChange={(e) => dataChange(e, "genero")}
           />
         </form>
-        <button className="crear" onClick={SendtoBackEnd}>crear</button>
+        <button className="crear" onClick={SendtoBackEnd}>
+          {!Loading ? <p>enviar</p> : <BtnLoader /> }
+          </button>
         
       </div>
     </section>
