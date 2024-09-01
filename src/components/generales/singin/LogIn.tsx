@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../singin/singin.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useAuth } from "../../compartidos/memoria/AuthProvider";
+import BtnLoader from "../../compartidos/Loader/BtnLoader";
 
 interface Props {
   windowChange: (messange: string) => void;
@@ -35,7 +36,7 @@ function SingIn({ windowChange }: Props) {
 
   const SendDataBackEnd = async () => {
     try {
-      setLoder(true)
+      setLoder(true);
       const response = await fetch(
         "https://gymbackend-production.up.railway.app/rutinas/log-in/",
         {
@@ -54,7 +55,7 @@ function SingIn({ windowChange }: Props) {
       return navigate(`/dashboard/${id_user}`);
     } catch {
       console.error("Error al enviar informacion:", Error);
-      setLoder(false)
+      setLoder(false);
     }
   };
 
@@ -99,8 +100,8 @@ function SingIn({ windowChange }: Props) {
           </form>
         </div>
         <div className="singin_buttons">
-          <button className="login" onClick={SendDataBackEnd}>
-            {!Loader ? <p>INICIAR SESION</p> : <div className="loader"></div>}
+          <button className={`login ${SingInData.email !== '' && SingInData.password !== '' ? "valid" : ''}`} onClick={SendDataBackEnd}>
+            {!Loader ? <p>INICIAR SESION</p> : <BtnLoader />}
           </button>
           <button
             className="create_acount_btn"

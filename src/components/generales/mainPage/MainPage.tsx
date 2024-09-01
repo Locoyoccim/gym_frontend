@@ -23,7 +23,7 @@ function MainPAge() {
         <div className="button_navigation">
           <button className="main_btn" > <Link to={`/exercise_history/${id_user}`}>Ir a ver</Link> </button>
           <button className="main_btn"> <Link to={`/NuevaRutina/${id_user}`}>Nuevo Entrenamiento</Link> </button>
-          <button className="main_btn" > <Link to={`/profile/${id_user}`}>mi Perfil</Link> </button>
+          <button className="main_btn" > <Link to={`/profile/${id_user}`}>Mi Perfil</Link> </button>
           <button className="log_out" onClick={() => Logout()}>
               Cerrar Sesion
             </button>

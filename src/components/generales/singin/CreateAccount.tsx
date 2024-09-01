@@ -2,6 +2,7 @@ import "../singin/singin.css";
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../compartidos/memoria/AuthProvider";
+import BtnLoader from "../../compartidos/Loader/BtnLoader";
 
 interface Props {
   windowChange: (message: string) => void;
@@ -36,6 +37,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
     /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+=-{};:"<>,./?])(?=.*\d).{8,}$/;
   const navigate = useNavigate();
   const { Login } = useAuth();
+  const [Loading, setLoading] = useState<Boolean>(false);
 
   // cambio el tipo de input password, visulisacion de contrase;a por el usuario
   const changeType = (e: React.MouseEvent<HTMLElement>) => {
@@ -47,7 +49,6 @@ function CreateAccount({ windowChange, windowState }: Props) {
   // Validacion de datos y actulizacion del estado
   const inputsValidations = (e: chengeEvent, inputName: string) => {
     setData({ ...data, [inputName]: e.target.value });
-
     switch (inputName) {
       case "email":
         if (e.target.value === "") {
@@ -77,6 +78,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
   // envio de datos del usuario al Backend
   const SendDataBackEnd = async () => {
     try {
+      setLoading(true);
       const response = await fetch(
         "https://gymbackend-production.up.railway.app/rutinas/crear-usuario/",
         {
@@ -90,11 +92,13 @@ function CreateAccount({ windowChange, windowState }: Props) {
       if (!response.ok) throw new Error("Error en la solicitud");
       const result = await response.json();
       console.log("Datos enviados Exitosamente", result);
+      setLoading(false);
       Login(result.access);
       const id_user = result.id;
       return navigate(`/userRegistration/${id_user}`);
     } catch {
       console.error("Error al enviar informacion:", Error);
+      setLoading(false);
     }
   };
 
@@ -107,9 +111,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
         </div>
         <form className="create_acount_form">
           {/* captura correo */}
-          <label htmlFor="get_email">
-            correo electronico
-          </label>
+          <label htmlFor="get_email">correo electronico</label>
           <input
             type="email"
             id="get_email"
@@ -181,8 +183,18 @@ function CreateAccount({ windowChange, windowState }: Props) {
           />
         </form>
         <div className="singin_buttons">
-          <button className="login" onClick={SendDataBackEnd}>
-            CREAR CUENTA
+          <button
+            className={`login ${
+              data.email !== "" &&
+              data.password !== "" &&
+              data.nombre !== "" &&
+              data.email !== ""
+                ? "valid"
+                : ""
+            }`}
+            onClick={SendDataBackEnd}
+          >
+            {!Loading ? <p>Crear cuenta</p> : <BtnLoader />}
           </button>
           <button
             className="create_acount_btn"

@@ -45,14 +45,14 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <SeriesContext>
-      <SelectDate>
-        <ExerciseProvider>
-          <AuthProvider>
+    <AuthProvider>
+      <SeriesContext>
+        <SelectDate>
+          <ExerciseProvider>
             <RouterProvider router={router} />
-          </AuthProvider>
-        </ExerciseProvider>
-      </SelectDate>
-    </SeriesContext>
+          </ExerciseProvider>
+        </SelectDate>
+      </SeriesContext>
+    </AuthProvider>
   </React.StrictMode>
 );
