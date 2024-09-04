@@ -22,11 +22,6 @@
     border: none;
     border-radius: 10px;
     color: var(--text);
-    font-size: 14px;
+    font-size: 19px;
     cursor: pointer;
-}
-.timmer{
-    color: var(--text);
-    font-size: 20px;
-
 }

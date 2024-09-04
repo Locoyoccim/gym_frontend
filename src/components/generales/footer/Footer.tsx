@@ -1,36 +1,28 @@
-import { useState } from "react";
 import "./footer.css";
-import Cronometro from "../../compartidos/stopwatch/Cronometro";
+import Timer from "../../compartidos/stopwatch/Timer";
 
 type props = {
-  sendToBackend: () => void;
+  setModalConfirmation: (value: string) => void;
   setShowModal: (value: string) => void;
 };
 
-function Footer({ sendToBackend, setShowModal }: props) {
-  const [isRunning, setIsRunning] = useState<boolean>(true);
-
-  // Detiene el cronometro del componente StopWatch
-  const handleStopTimer = () => {
-    setIsRunning(false);
-  };
-
+function Footer({ setModalConfirmation, setShowModal }: props) {
   return (
     <>
       <section className={`footer`}>
         <button
           className="finish"
           onClick={() => {
-            handleStopTimer(), sendToBackend();
+            setModalConfirmation("openConfirmation");
           }}
         >
           Finalizar
         </button>
-        <Cronometro isRunning={isRunning} />
         <button className="other" onClick={() => setShowModal("open_modal")}>
           Historia
         </button>
       </section>
+      <Timer />
     </>
   );
 }
