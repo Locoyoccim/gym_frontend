@@ -2,45 +2,19 @@
 
 .timer {
   color: var(--text);
-  font-size: 36px;
+  font-size: 35px;
+  height: 100%;
 }
 #timer_container {
-  position: fixed;
-  bottom: 0;
-  left: 170px;
-  width: max-content;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-#timerBtn_container {
-  position: absolute;
-  transform: translateY(60px);
-  display: flex;
-  visibility: hidden;
-  transition: all 1s ease;
-  z-index: 8;
-}
-#timerBtn_container.up {
-  transform: translateY(-70px);
-  visibility: visible;
-  transition: all 1s ease;
   column-gap: 10px;
-  .timerbtn{
-    margin: 0;
-    transition: all 2s ease;
-  }
 }
 .timerbtn {
   background: none;
-  color: var(--text);
-  font-size: 55px;
   border: none;
-  margin: 0 -35px;
-  transition: all 2s ease;
-}
-.timerbtn.reset_turn {
-  transform: rotate(360deg);
-  transition: all 0.4s ease;
+  color: var(--text);
+  font-size: 35px;
 }

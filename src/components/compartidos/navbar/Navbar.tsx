@@ -27,8 +27,6 @@ function Navbar() {
           <button className="close_btn" onClick={() => navButton("")}>
             <i className="bi bi-x-circle"></i>
           </button>
-
-          <li>Otras Rutinas</li>
           <li>
             <Link to={`/dashboard/${id_user}`}>Inicio</Link>
           </li>
