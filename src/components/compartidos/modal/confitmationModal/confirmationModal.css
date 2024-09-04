@@ -1,0 +1,56 @@
+@import url("../../colors.css");
+
+#modalConfirmation {
+  background: var(--bg_card_gradient);
+  color: var(--text);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 90%;
+  height: max-content;
+  display: grid;
+  text-align: center;
+  row-gap: 20px;
+  padding: 20px 5px;
+  z-index: 7;
+  border-radius: 15px;
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+/* controla la apertura y cierre del modal */
+#modalConfirmation.openConfirmation {
+  transform: translate(-50%, -50%) scale(1);
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+#modalConfirmation i {
+  font-size: 74px;
+}
+.modal_tittle,
+.modal_msj {
+  text-transform: uppercase;
+}
+.modalBtns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.modalBtns button {
+  font-size: 22px;
+  padding: 10px 25px;
+  background: none;
+  border: none;
+  border-radius: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: capitalize;
+}
+.modalBtns .confirmationBtn {
+  background: var(--dark_red);
+  color: var(--text);
+}
+.modalBtns .cancelBtn {
+  background-color: var(--black);
+  border: solid 1px var(--dark_red);
+  color: var(--dark_red);
+}

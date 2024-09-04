@@ -1,4 +1,4 @@
-@import url("../colors.css");
+@import url("../../colors.css");
 #modal_container {
   background: var(--dark_red);
   border: 3px solid var(--borders);

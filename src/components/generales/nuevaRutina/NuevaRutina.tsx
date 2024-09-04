@@ -4,7 +4,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import Navbar from "../../compartidos/navbar/Navbar";
 import InputExercise from "./InputName";
 import Footer from "../footer/Footer";
-import Modal from "../../compartidos/modal/Modal";
+import Modal from "../../compartidos/modal/ModalExercise/Modal.tsx";
+import ConfirmationModal from "../../compartidos/modal/confitmationModal/ConfirmationModal.tsx";
 import { useNavigate, useParams } from "react-router-dom";
 
 interface serieProps {
@@ -33,11 +34,12 @@ const getCurrentDate = (): string => {
 
 function NuevaRutina() {
   const [userExercise, setUserExercise] = useState<exerciseProps[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const { id_user } = useParams();
   const UserId: number = id_user ? parseInt(id_user, 10) : 0;
-  const [showModal, setShowModal] = useState<string>('');
+  const [showModal, setShowModal] = useState<string>("");
+  const [modalConfirmation, setModalConfirmation] = useState<string>('')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   // trae la informacion de los componentes hijos
   const getInputValues = (
@@ -79,7 +81,12 @@ function NuevaRutina() {
       ]);
       setUserExercise([
         ...userExercise,
-        { ejercicio: 0, series: [], fecha: getCurrentDate(), usuario_id: UserId },
+        {
+          ejercicio: 0,
+          series: [],
+          fecha: getCurrentDate(),
+          usuario_id: UserId,
+        },
       ]);
     } else if (action === "remove") {
       setInputExercise(inputExercise.slice(0, -1));
@@ -90,39 +97,46 @@ function NuevaRutina() {
   // Envia datos al Backend
 
   const sendToBackend = async () => {
-    const jwt = localStorage.getItem('token')
-    setLoading(true);
+    const jwt = localStorage.getItem("token");
+    setIsLoading(true)
     try {
-      const response = await fetch("https://gymbackend-production.up.railway.app/rutinas/series/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwt}`,
-        },
-        body: JSON.stringify(userExercise),
-      });
+      const response = await fetch(
+        "https://gymbackend-production.up.railway.app/rutinas/series/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt}`,
+          },
+          body: JSON.stringify(userExercise),
+        }
+      );
       if (!response.ok) {
         throw new Error("Error al enviar su rutina");
       }
       const data = await response.json();
+      setIsLoading(false)
       console.log("Datos enviados Exitosamente", data);
-      setLoading(false);
       return navigate(`/dashboard/${id_user}`);
     } catch (error) {
       console.log("Error", error);
-      setLoading(false);
+      setIsLoading(false)
     }
   };
 
   return (
     <>
-      <Modal modalState={showModal} setShowModal={setShowModal}/>
-      {loading && (
-        <div className="loader_container">
-          <div className="loader"></div>
-          <p>Guardando Rutina</p>
-        </div>
-      )}
+      <Modal modalState={showModal} setShowModal={setShowModal} />
+      <ConfirmationModal
+        ModalTittle="gran entrenamiento"
+        ModalMsj="ahora solo envia tu rutina, disfruta el descanso y recuperacion"
+        ConfirmationMsj="Enviar"
+        ReturnMsj="regresar"
+        sendToBackend={sendToBackend}
+        ModalState={modalConfirmation}
+        setModalConfirmation={setModalConfirmation}
+        isLoading={isLoading}
+      />
       <Navbar />
       <section id="nueva_rutina">
         <button
@@ -146,7 +160,7 @@ function NuevaRutina() {
           </button>
         </div>
       </section>
-      <Footer sendToBackend={sendToBackend} setShowModal={setShowModal}/>
+      <Footer setModalConfirmation={setModalConfirmation} setShowModal={setShowModal} />
     </>
   );
 }

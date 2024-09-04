@@ -1,6 +1,6 @@
 import "./modal.css";
-import { ExerciseNames } from "../memoria/ExerciseProvider";
-import { SerieContext } from "../memoria/SeriesContext";
+import { ExerciseNames } from "../../memoria/ExerciseProvider"; 
+import { SerieContext } from "../../memoria/SeriesContext";
 import { ChangeEvent, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import ModalResult from "./ModalResults";
