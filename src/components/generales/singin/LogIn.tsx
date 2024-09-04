@@ -4,6 +4,7 @@ import "../singin/singin.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useAuth } from "../../compartidos/memoria/AuthProvider";
 import BtnLoader from "../../compartidos/Loader/BtnLoader";
+import InputEye from "../../compartidos/inputEye/InputEye";
 
 interface Props {
   windowChange: (messange: string) => void;
@@ -18,16 +19,13 @@ function SingIn({ windowChange }: Props) {
   const navigate = useNavigate();
   const [Loader, setLoder] = useState<Boolean>(false);
   const [inputType, setInputType] = useState<string>("password");
-  const [eyeAnimation, setEyeAnitmation] = useState<string>("");
   const [SingInData, SetSingInData] = useState<userData>({
     email: "",
     password: "",
   });
 
-  const changeType = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
+  const changeType = () => {
     setInputType(inputType === "password" ? "text" : "password");
-    setEyeAnitmation(eyeAnimation === "" ? "animation_in" : "");
   };
 
   const InputData = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
@@ -90,17 +88,18 @@ function SingIn({ windowChange }: Props) {
               aria-label="Contraseña"
               required
             />
-            <button
-              className={`show_password ${eyeAnimation}`}
-              onClick={(e) => changeType(e)}
-              type="button"
-            >
-              <i className="bi bi-eye-fill"></i>
-            </button>
+            <InputEye operation={changeType} />
           </form>
         </div>
         <div className="singin_buttons">
-          <button className={`login ${SingInData.email !== '' && SingInData.password !== '' ? "valid" : ''}`} onClick={SendDataBackEnd}>
+          <button
+            className={`login ${
+              SingInData.email !== "" && SingInData.password !== ""
+                ? "valid"
+                : ""
+            }`}
+            onClick={SendDataBackEnd}
+          >
             {!Loader ? <p>INICIAR SESION</p> : <BtnLoader />}
           </button>
           <button

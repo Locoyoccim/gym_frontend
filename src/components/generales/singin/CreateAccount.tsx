@@ -3,6 +3,7 @@ import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../compartidos/memoria/AuthProvider";
 import BtnLoader from "../../compartidos/Loader/BtnLoader";
+import InputEye from "../../compartidos/inputEye/InputEye";
 
 interface Props {
   windowChange: (message: string) => void;
@@ -20,8 +21,8 @@ interface dataProps {
 type chengeEvent = ChangeEvent<HTMLInputElement>;
 
 function CreateAccount({ windowChange, windowState }: Props) {
-  const [inputType, setInputType] = useState<string>("password");
-  const [eyeAnimation, setEyeAnitmation] = useState<string>("");
+  const [inputType1, setInput1Type] = useState<string>("password");
+  const [inputType2, setInput2Type] = useState<string>("password");
   const [data, setData] = useState<dataProps>({
     nombre: "",
     apellidos: "",
@@ -40,10 +41,11 @@ function CreateAccount({ windowChange, windowState }: Props) {
   const [Loading, setLoading] = useState<Boolean>(false);
 
   // cambio el tipo de input password, visulisacion de contrase;a por el usuario
-  const changeType = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    setInputType(inputType === "password" ? "text" : "password");
-    setEyeAnitmation(eyeAnimation === "" ? "animation_in" : "");
+  const changeType1 = () => {
+    setInput1Type(inputType1 === "password" ? "text" : "password");
+  };
+  const changeType2 = () => {
+    setInput2Type(inputType2 === "password" ? "text" : "password");
   };
 
   // Validacion de datos y actulizacion del estado
@@ -124,34 +126,24 @@ function CreateAccount({ windowChange, windowState }: Props) {
           {/* eleccion de contrase;a */}
           <label htmlFor="password1">contraseña</label>
           <input
-            type={inputType}
+            type={inputType1}
             id="password1"
             autoComplete="new-password"
             onChange={(e) => inputsValidations(e, "password")}
           />
-          <button
-            className={`show_password ${eyeAnimation}`}
-            onClick={(e) => changeType(e)}
-          >
-            <i className="bi bi-eye-fill"></i>
-          </button>
+            <InputEye operation={changeType1}/>
           <p className={`password_msj ${passwordError}`}>
             la contraseña debe contener numeros, letras y un caracter especial
           </p>
           {/* validacion la contrase;a */}
           <label htmlFor="password_confirmation">repite tu contraseña</label>
           <input
-            type={inputType}
+            type={inputType2}
             id="password_confirmation"
             autoComplete="new-password"
             onChange={(e) => inputsValidations(e, "passwordConfirmation")}
           />
-          <button
-            className={`show_password ${eyeAnimation}`}
-            onClick={(e) => changeType(e)}
-          >
-            <i className="bi bi-eye-fill"></i>
-          </button>
+            <InputEye operation={changeType2}/>
           <p
             className={`confirmation_msj ${JSON.stringify(confirmationError)}`}
           >

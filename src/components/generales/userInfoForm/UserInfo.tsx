@@ -83,7 +83,7 @@ function UserInfo() {
             placeholder={JSON.stringify(edad)}
             onChange={(e) => dataChange(e, "edad")}
           />
-          <label htmlFor="height">cual es tu estatura?</label>
+          <label htmlFor="height">cual es tu estatura cm?</label>
           <input
             type="number"
             id="height"

@@ -11,18 +11,19 @@ function Footer({ setModalConfirmation, setShowModal }: props) {
     <>
       <section className={`footer`}>
         <button
-          className="finish"
+          className="finish_btn"
           onClick={() => {
             setModalConfirmation("openConfirmation");
           }}
         >
           Finalizar
         </button>
-        <button className="other" onClick={() => setShowModal("open_modal")}>
+        <Timer />
+        <button className="historia_btn" onClick={() => setShowModal("open_modal")}>
           Historia
         </button>
       </section>
-      <Timer />
+      
     </>
   );
 }

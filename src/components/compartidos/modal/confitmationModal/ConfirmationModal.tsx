@@ -27,7 +27,7 @@ function ConfirmationModal({
 
     <div id="modalConfirmation" className={ModalState}>
       <i className="bi bi-check-circle-fill"></i>
-      <h1 className="modal_tittle">{ModalTittle}</h1>
+      <h2 className="modal_tittle">{ModalTittle}</h2>
       <p className="modal_msj">{ModalMsj}</p>
       <div className="modalBtns">
         <button className="confirmationBtn" onClick={() => sendToBackend()}>
