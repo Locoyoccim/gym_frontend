@@ -9,7 +9,7 @@ interface modalProps {
   sendToBackend: () => void;
   setModalConfirmation: (value: string) => void;
   ModalState: string;
-  isLoading: boolean
+  isLoading: boolean;
 }
 
 function ConfirmationModal({
@@ -20,13 +20,16 @@ function ConfirmationModal({
   sendToBackend,
   setModalConfirmation,
   ModalState,
-  isLoading
+  isLoading,
 }: modalProps) {
   return (
     // ModalState control la apertura y ciere del modal con la clase openConfirmation
 
     <div id="modalConfirmation" className={ModalState}>
-      <i className="bi bi-check-circle-fill"></i>
+      <div className="done-container">
+        <i className="bi bi-check-circle-fill"></i>
+      </div>
+
       <h2 className="modal_tittle">{ModalTittle}</h2>
       <p className="modal_msj">{ModalMsj}</p>
       <div className="modalBtns">

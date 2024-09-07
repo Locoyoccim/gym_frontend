@@ -21,7 +21,7 @@ function Timer() {
       </h1>
       <button
         className="timerbtn reset_turn"
-        onClick={() => reset(new Date(), false)}
+        onClick={() => reset(new Date(), true)}
       >
         <i className="bi bi-arrow-clockwise"></i>
       </button>

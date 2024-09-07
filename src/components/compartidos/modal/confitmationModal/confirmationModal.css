@@ -8,13 +8,13 @@
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
   width: 90%;
-  height: max-content;
+  height: 41vh;
   display: grid;
   text-align: center;
   row-gap: 10px;
   padding: 0px 5px 15px;
   z-index: 7;
-  border-radius: 15px;
+  border-radius: 24px;
   transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 /* controla la apertura y cierre del modal */
@@ -22,8 +22,10 @@
   transform: translate(-50%, -50%) scale(1);
   transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
-#modalConfirmation i {
+.bi-check-circle-fill{
   font-size: 74px;
+  padding: 0;
+  margin: 0;
 }
 .modal_tittle,
 .modal_msj {

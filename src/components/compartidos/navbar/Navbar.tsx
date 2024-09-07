@@ -2,13 +2,15 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./navbar.css";
 import navImg from "/muscle-arm-svgrepo-com.svg";
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { useAuth } from "../memoria/AuthProvider";
+import Cronometro from "../stopwatch/Cronometro";
 
 function Navbar() {
   const [navState, setNavState] = useState("");
   const { id_user } = useParams();
   const { Logout } = useAuth();
+  const location = useLocation()
 
   const navButton = (newState: string) => {
     setNavState(newState);
@@ -19,6 +21,9 @@ function Navbar() {
       <button>
         <img src={navImg} alt="nav_img" />
       </button>
+      <div className="rutinaTime">
+        {location.pathname === `/NuevaRutina/${id_user}` ? <Cronometro /> : '' }
+      </div>
       <button className="hamburguer_btn" onClick={() => navButton("open")}>
         <i className="bi bi-list"></i>
       </button>
