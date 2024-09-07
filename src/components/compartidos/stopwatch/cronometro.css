@@ -5,6 +5,10 @@
   font-size: 35px;
   height: 100%;
 }
+.general_timer{
+  color: var(--text);
+  font-size: 25px;
+}
 #timer_container {
   height: 60px;
   display: flex;
