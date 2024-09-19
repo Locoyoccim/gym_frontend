@@ -5,21 +5,18 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { useAuth } from "../../compartidos/memoria/AuthProvider";
 import BtnLoader from "../../compartidos/Loader/BtnLoader";
 import InputEye from "../../compartidos/inputEye/InputEye";
+import { userProps } from "../../../interfaces";
 
 interface Props {
-  windowChange: (messange: string) => void;
-}
-interface userData {
-  email: string;
-  password: string;
+  windowChange: (message: string) => void;
 }
 
 function SingIn({ windowChange }: Props) {
   const { Login } = useAuth();
   const navigate = useNavigate();
-  const [Loader, setLoder] = useState<Boolean>(false);
+  const [Loader, setLoader] = useState<boolean>(false);
   const [inputType, setInputType] = useState<string>("password");
-  const [SingInData, SetSingInData] = useState<userData>({
+  const [SingInData, SetSingInData] = useState<userProps>({
     email: "",
     password: "",
   });
@@ -34,7 +31,7 @@ function SingIn({ windowChange }: Props) {
 
   const SendDataBackEnd = async () => {
     try {
-      setLoder(true);
+      setLoader(true);
       const response = await fetch(
         "https://gymbackend-production.up.railway.app/rutinas/log-in/",
         {
@@ -52,14 +49,14 @@ function SingIn({ windowChange }: Props) {
       const id_user = result.id;
       return navigate(`/dashboard/${id_user}`);
     } catch {
-      console.error("Error al enviar informacion:", Error);
-      setLoder(false);
+      console.error("Error al enviar información:", Error);
+      setLoader(false);
     }
   };
 
   return (
     <section id="login_section">
-      {/* contenedor para iniciar sesion */}
+      {/* contenedor para iniciar sesión */}
       <div className="singin_container">
         <div className="img_singin">
           <i className="bi bi-house-heart"></i>
@@ -100,7 +97,7 @@ function SingIn({ windowChange }: Props) {
             }`}
             onClick={SendDataBackEnd}
           >
-            {!Loader ? <p>INICIAR SESION</p> : <BtnLoader />}
+            {!Loader ? <p>INICIAR SESIÓN</p> : <BtnLoader />}
           </button>
           <button
             className="create_acount_btn"

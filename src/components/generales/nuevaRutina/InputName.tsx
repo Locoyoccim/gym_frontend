@@ -1,34 +1,13 @@
 import Inputs from "./Inputs";
-import { useState, ChangeEvent, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./inputName.css";
 import { ExerciseNames } from "../../compartidos/memoria/ExerciseProvider";
+import { userProps, getInputValues, changeEvent, series } from "../../../interfaces";
 
-interface dataProps {
-  id: number;
-  nombre: string;
-}
-
-interface serieProps {
-  peso: number;
-  reps: number;
-  rir: number;
-  recu: number;
-}
-
-interface getInputValues {
-  index: number;
-  getInputValues: (
-    index: number,
-    ejercicio: number,
-    series: serieProps[]
-  ) => void;
-}
-
-type ValueOF = ChangeEvent<HTMLInputElement>;
 
 function InputName({ index, getInputValues }: getInputValues) {
-  const [series, setSeries] = useState<serieProps[]>([
+  const [series, setSeries] = useState<series[]>([
     {
       peso: 0,
       reps: 0,
@@ -36,16 +15,16 @@ function InputName({ index, getInputValues }: getInputValues) {
       recu: 0,
     },
   ]);
-  const ExerciseData: dataProps[] = useContext(ExerciseNames);
+  const ExerciseData: userProps[] = useContext(ExerciseNames);
   const [filterExerciseData, setFilterExerciseData] = useState(ExerciseData);
   const [exerciseList, setExerciseList] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
   const [exerciseId, setExerciseId] = useState<number>(0);
 
-  // carga de informacion del ususario
+  // carga de información del usuario
   const getSeriesInfo = (
     seriesIndex: number,
-    prop: keyof serieProps,
+    prop: keyof series,
     value: number
   ) => {
     setSeries((prev) => {
@@ -59,7 +38,7 @@ function InputName({ index, getInputValues }: getInputValues) {
     getInputValues(index, exerciseId, series);
   }, [inputValue, series]);
 
-  // Estado inicial de los lineas de inputs, declarado despues de la funcion getSeriesInfo
+  // Estado inicial de los lineas de inputs, declarado después de la función getSeriesInfo
   const [inputLines, setInputLines] = useState([
     [
       <Inputs
@@ -70,7 +49,7 @@ function InputName({ index, getInputValues }: getInputValues) {
       />,
     ],
   ]);
-  // addInputLine, se encarga de agregar inputs al para un ejercicio mas y la lista que se eniara al contenedor padre
+  // addInputLine, se encarga de agregar inputs al para un ejercicio mas y la lista que se enviara al contenedor padre
   const addInputLine = () => {
     setInputLines([
       ...inputLines,
@@ -86,7 +65,7 @@ function InputName({ index, getInputValues }: getInputValues) {
     setSeries([...series, { peso: 0, reps: 0, rir: 0, recu: 0 }]);
   };
 
-  // removevInputLine, remueve inputs de ejercicio.
+  // removeInputLine, remueve inputs de ejercicio.
   const removeInputLine = () => {
     if (inputLines.length > 1) {
       setInputLines(inputLines.slice(0, -1));
@@ -100,7 +79,7 @@ function InputName({ index, getInputValues }: getInputValues) {
   }
 
   // Encargada de filtrar y rederizar el ejercicio buscado
-  function getInputValue(e: ValueOF, list: dataProps[]) {
+  function getInputValue(e: changeEvent, list: userProps[]) {
     setInputValue(e.target.value);
     const lowerCaseInput = e.target.value.toLowerCase();
     const matches = list.filter((item) =>
@@ -121,7 +100,7 @@ function InputName({ index, getInputValues }: getInputValues) {
           }}
         />
         <div className={`exercise_list ${exerciseList}`}>
-          {/* Regresa lista de ejercicios traida del BE */}
+          {/* Regresa lista de ejercicios traída del BE */}
           {filterExerciseData.map((item) => (
             <p
               key={item.id}

@@ -1,18 +1,11 @@
-import { createContext, ReactNode, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
+import { userProps, childrenContext } from "../../../interfaces";
 
-interface dataProps {
-  id: number;
-  nombre: string;
-}
 
-type children = {
-  children: ReactNode;
-};
+export const ExerciseNames = createContext<userProps[]>([]);
 
-export const ExerciseNames = createContext<dataProps[]>([]);
-
-function ExerciseProvider({ children }: children) {
-  const [FetchData, setFetchData] = useState<dataProps[]>([]);
+function ExerciseProvider({ children }: childrenContext) {
+  const [FetchData, setFetchData] = useState<userProps[]>([]);
   const jwt = localStorage.getItem("token");
 
   useEffect(() => {

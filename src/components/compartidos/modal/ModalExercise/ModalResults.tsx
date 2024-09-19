@@ -1,18 +1,9 @@
 import "./modalResults.css";
 import ModalP from "./ModalP";
+import { fechaSerieProps } from "../../../../interfaces";
 
-interface Serie {
-  peso: number;
-  reps: number;
-  rir: number;
-  recu: number;
-}
 
-interface props {
-  fecha: string;
-  series: Serie[];
-}
-function ModalResult({ fecha, series }: props) {
+function ModalResult({ fecha, series }: fechaSerieProps) {
   return (
     <section id="results_details">
       <p className="fecha">{fecha}</p>

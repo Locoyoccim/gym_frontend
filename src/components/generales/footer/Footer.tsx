@@ -1,12 +1,9 @@
 import "./footer.css";
 import Timer from "../../compartidos/stopwatch/Timer";
+import { functions } from "../../../interfaces";
 
-type props = {
-  setModalConfirmation: (value: string) => void;
-  setShowModal: (value: string) => void;
-};
 
-function Footer({ setModalConfirmation, setShowModal }: props) {
+function Footer({ setModalConfirmation, setShowModal }: functions) {
   return (
     <>
       <section className={`footer`}>

@@ -1,55 +1,32 @@
 import "./modal.css";
 import { ExerciseNames } from "../../memoria/ExerciseProvider"; 
 import { SerieContext } from "../../memoria/SeriesContext";
-import { ChangeEvent, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import ModalResult from "./ModalResults";
+import { changeEvent, CompleteSerie, userProps, ModalProps2 } from "../../../../interfaces";
 
-interface dataProps {
-  id: number;
-  nombre: string;
-}
-interface ModalProps {
-  modalState: string;
-  setShowModal: (e: string) => void;
-}
 
-interface Serie {
-  peso: number;
-  reps: number;
-  rir: number;
-  recu: number;
-}
-
-interface Ejercicio {
-  name: string;
-  series: Serie[];
-  fecha: string;
-  usuario_id: number;
-}
-
-type ValueOF = ChangeEvent<HTMLInputElement>;
-
-function Modal({ modalState, setShowModal }: ModalProps) {
+function Modal({ modalState, setShowModal }: ModalProps2) {
   const { id_user } = useParams();
   const num_id: number = parseInt(id_user ?? "", 10);
   // Manejo del nombre ejercicio
-  const ExerciseData: dataProps[] = useContext(ExerciseNames);
+  const ExerciseData: userProps[] = useContext(ExerciseNames);
   const [inputValue, setInputValue] = useState<string>();
-  const [filterData, setFilterData] = useState<dataProps[]>(ExerciseData);
+  const [filterData, setFilterData] = useState<userProps[]>(ExerciseData);
   const [showOptions, setShowOptions] = useState<string>("");
 
   // Data de las series de acuerdo al nombre del ejercicio
-  const seriesData: Ejercicio[] = useContext(SerieContext);
-  const user_exercise: Ejercicio[] = seriesData.filter(
+  const seriesData: CompleteSerie[] = useContext(SerieContext);
+  const user_exercise: CompleteSerie[] = seriesData.filter(
     (item) => item.usuario_id === num_id
   );
-  const exercise_history: Ejercicio[] = user_exercise.filter(
+  const exercise_history: CompleteSerie[] = user_exercise.filter(
     (item) => item.name === inputValue
   );
 
   //Busca el nombre del ejercicio de acuerdo a los valores del input
-  function getExerciseName(e: ValueOF, list: dataProps[]) {
+  function getExerciseName(e: changeEvent, list: userProps[]) {
     setInputValue(e.target.value);
     const lowerCaseInput = e.target.value.toLowerCase();
     const matches = list.filter((item) =>

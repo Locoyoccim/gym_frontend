@@ -40,7 +40,7 @@ function Navbar() {
           </li>
           <li>
             <button className="log_out" onClick={() => Logout()}>
-              Cerrar Sesion
+              Cerrar Sesión
             </button>
           </li>
         </ul>

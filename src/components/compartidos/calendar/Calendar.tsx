@@ -10,7 +10,6 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 function Calendar_choice() {
   const contexto = useContext(ActualDate);
   const [value, onChange] = useState<Value>(new Date());
-
   const date = value as Date;
   const dia: string = date?.getDate()?.toString().padStart(2, "0") ?? ""; // Obtener día con dos dígitos
   const mes: string = (date?.getMonth() + 1)?.toString().padStart(2, "0") ?? ""; // Obtener mes con dos dígitos
@@ -19,7 +18,7 @@ function Calendar_choice() {
 
   useEffect(() => {
     contexto?.enviar({ tipo: "update", value: formatoFecha });
-  }, [value]);
+  }, [value, formatoFecha, contexto]);
 
   return (
     <div>

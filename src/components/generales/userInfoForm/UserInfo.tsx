@@ -1,19 +1,11 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../userInfoForm/userInfo.css";
 import { useNavigate, useParams } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
 import BtnLoader from "../../compartidos/Loader/BtnLoader";
+import { infoUserProps, changeEvent } from "../../../interfaces";
 
-interface dataProps {
-  id_user: number;
-  actualizacion: string;
-  edad: number;
-  peso_kg: number;
-  estatura: number;
-  genero: string;
-}
 
-type change = React.ChangeEvent<HTMLInputElement>;
 
 const getCurrentDate = (): string => {
   const today = new Date();
@@ -26,9 +18,9 @@ const getCurrentDate = (): string => {
 
 function UserInfo() {
   const { id_user } = useParams<{id_user: string}>() 
-  const [Loading, setLoagin] = useState<Boolean>(false)
+  const [Loading, setLoading] = useState<boolean>(false)
   const navigate = useNavigate()
-  const [userData, setUserData] = useState<dataProps>(
+  const [userData, setUserData] = useState<infoUserProps>(
     {
       id_user: id_user ? parseInt(id_user, 10) : 0,
       actualizacion: getCurrentDate(),
@@ -41,14 +33,14 @@ function UserInfo() {
 
   const { edad, peso_kg, estatura, genero } = userData;
   
-  // Actualiza la informacion del usuario
-  const dataChange = (e: change, field: keyof dataProps) => {
+  // Actualiza la información del usuario
+  const dataChange = (e: changeEvent, field: keyof infoUserProps) => {
     setUserData({...userData, [field]:e.target.value})
   };
 
-  const SendtoBackEnd = async () =>{
+  const SendToBackEnd = async () =>{
     try {
-      setLoagin(true)
+      setLoading(true)
       const response = await fetch("https://gymbackend-production.up.railway.app/rutinas/newuserinfo/", {
         method: "POST",
         headers: {
@@ -59,11 +51,11 @@ function UserInfo() {
       if (!response.ok) throw new Error("Error en la solicitud");
       const result = await response.json();
       console.log("Datos enviados Exitosamente", result);
-      setLoagin(false)
+      setLoading(false)
       return navigate('/');
     } catch {
-      console.error("Error al enviar informacion:", Error);
-      setLoagin(false)
+      console.error("Error al enviar información:", Error);
+      setLoading(false)
     }
   }
 
@@ -107,7 +99,7 @@ function UserInfo() {
             onChange={(e) => dataChange(e, "genero")}
           />
         </form>
-        <button className="crear" onClick={SendtoBackEnd}>
+        <button className="crear" onClick={SendToBackEnd}>
           {!Loading ? <p>enviar</p> : <BtnLoader /> }
           </button>
         

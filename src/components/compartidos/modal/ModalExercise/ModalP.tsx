@@ -1,12 +1,8 @@
 import './modalP.css'
+import { series } from '../../../../interfaces';
 
-interface Serie {
-    peso: number;
-    reps: number;
-    rir: number;
-}
 
-function ModalP({peso, reps, rir}: Serie) {
+function ModalP({peso, reps, rir}: series) {
   return (
     <section id="result_displyer">
       <p className="result">{peso}</p>

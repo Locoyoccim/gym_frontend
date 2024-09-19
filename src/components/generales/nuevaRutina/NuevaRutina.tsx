@@ -7,20 +7,7 @@ import Footer from "../footer/Footer";
 import Modal from "../../compartidos/modal/ModalExercise/Modal.tsx";
 import ConfirmationModal from "../../compartidos/modal/confitmationModal/ConfirmationModal.tsx";
 import { useNavigate, useParams } from "react-router-dom";
-
-interface serieProps {
-  peso: number;
-  reps: number;
-  rir: number;
-  recu: number;
-}
-
-interface exerciseProps {
-  ejercicio: number;
-  series: serieProps[];
-  fecha: string;
-  usuario_id: number;
-}
+import { series, CompleteSerie } from "../../../interfaces/index.tsx";
 
 //Obtener el dia en curso
 const getCurrentDate = (): string => {
@@ -33,7 +20,7 @@ const getCurrentDate = (): string => {
 };
 
 function NuevaRutina() {
-  const [userExercise, setUserExercise] = useState<exerciseProps[]>([]);
+  const [userExercise, setUserExercise] = useState<CompleteSerie[]>([]);
   const navigate = useNavigate();
   const { id_user } = useParams();
   const UserId: number = id_user ? parseInt(id_user, 10) : 0;
@@ -41,11 +28,11 @@ function NuevaRutina() {
   const [modalConfirmation, setModalConfirmation] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  // trae la informacion de los componentes hijos
+  // trae la información de los componentes hijos
   const getInputValues = (
     index: number,
     ejercicio: number,
-    series: serieProps[]
+    series: series[]
   ) => {
     const date = getCurrentDate();
 
@@ -66,7 +53,7 @@ function NuevaRutina() {
     [<InputExercise key={0} getInputValues={getInputValues} index={0} />],
   ]);
 
-  // agrega o quita input, segun el usuario lo requiera
+  // agrega o quita input, según el usuario lo requiera
   const addInputExercise = (action: string) => {
     if (action === "add") {
       setInputExercise([
@@ -94,7 +81,7 @@ function NuevaRutina() {
     }
   };
 
-  // Envia datos al Backend
+  // Envía datos al Backend
 
   const sendToBackend = async () => {
     const jwt = localStorage.getItem("token");
@@ -129,7 +116,7 @@ function NuevaRutina() {
       <Modal modalState={showModal} setShowModal={setShowModal} />
       <ConfirmationModal
         ModalTittle="gran entrenamiento"
-        ModalMsj="ahora solo envia tu rutina, disfruta el descanso y recuperacion"
+        ModalMsj="ahora solo envía tu rutina, disfruta el descanso y recuperación"
         ConfirmationMsj="Enviar"
         ReturnMsj="regresar"
         sendToBackend={sendToBackend}
@@ -143,7 +130,7 @@ function NuevaRutina() {
           className="nueva_rutina_btn"
           onClick={() => addInputExercise("add")}
         ></button>
-        {/* se rederizan los inputs, inicial de 1 */}
+        {/* se rederizar los inputs, inicial de 1 */}
         {inputExercise.map((input) => input)}
         <div className="btn_container">
           <button

@@ -1,27 +1,11 @@
-import { createContext, ReactNode, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useAuth } from "./AuthProvider";
-
-interface series{
-    peso: number;
-    reps: number;
-    rir: number;
-    recu: number;
-}
-
-interface CompleteSerie {
-    name: string;
-    series: series[];
-    fecha: string;
-    usuario_id: number;
-  }
+import { CompleteSerie, childrenContext } from "../../../interfaces";
 
 export const SerieContext = createContext<CompleteSerie[]>([]);
 
-type SerieData = {
-  children: ReactNode;
-};
 
-function SeriesContext({ children }: SerieData) {
+function SeriesContext({ children }: childrenContext) {
   const [FetchData, setFetchData] = useState<CompleteSerie[]>([]);
   const { isAuthenticated } = useAuth();
   const jwt = localStorage.getItem('token')

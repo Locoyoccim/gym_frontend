@@ -1,29 +1,21 @@
 import "../singin/singin.css";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../compartidos/memoria/AuthProvider";
 import BtnLoader from "../../compartidos/Loader/BtnLoader";
 import InputEye from "../../compartidos/inputEye/InputEye";
+import { changeEvent, dataUserProps } from "../../../interfaces";
 
 interface Props {
   windowChange: (message: string) => void;
   windowState: string;
 }
 
-interface dataProps {
-  nombre: string;
-  apellidos: string;
-  email: string;
-  username: string;
-  password: string;
-}
-
-type chengeEvent = ChangeEvent<HTMLInputElement>;
 
 function CreateAccount({ windowChange, windowState }: Props) {
   const [inputType1, setInput1Type] = useState<string>("password");
   const [inputType2, setInput2Type] = useState<string>("password");
-  const [data, setData] = useState<dataProps>({
+  const [data, setData] = useState<dataUserProps>({
     nombre: "",
     apellidos: "",
     email: "",
@@ -38,9 +30,9 @@ function CreateAccount({ windowChange, windowState }: Props) {
     /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+=-{};:"<>,./?])(?=.*\d).{8,}$/;
   const navigate = useNavigate();
   const { Login } = useAuth();
-  const [Loading, setLoading] = useState<Boolean>(false);
+  const [Loading, setLoading] = useState<boolean>(false);
 
-  // cambio el tipo de input password, visulisacion de contrase;a por el usuario
+  // cambio el tipo de input password, visualización de contraseña por el usuario
   const changeType1 = () => {
     setInput1Type(inputType1 === "password" ? "text" : "password");
   };
@@ -48,8 +40,8 @@ function CreateAccount({ windowChange, windowState }: Props) {
     setInput2Type(inputType2 === "password" ? "text" : "password");
   };
 
-  // Validacion de datos y actulizacion del estado
-  const inputsValidations = (e: chengeEvent, inputName: string) => {
+  // Validación de datos y actualización del estado
+  const inputsValidations = (e: changeEvent, inputName: string) => {
     setData({ ...data, [inputName]: e.target.value });
     switch (inputName) {
       case "email":
@@ -77,7 +69,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
         break;
     }
   };
-  // envio de datos del usuario al Backend
+  // envió de datos del usuario al Backend
   const SendDataBackEnd = async () => {
     try {
       setLoading(true);
@@ -99,7 +91,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
       const id_user = result.id;
       return navigate(`/userRegistration/${id_user}`);
     } catch {
-      console.error("Error al enviar informacion:", Error);
+      console.error("Error al enviar información:", Error);
       setLoading(false);
     }
   };
@@ -113,7 +105,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
         </div>
         <form className="create_acount_form">
           {/* captura correo */}
-          <label htmlFor="get_email">correo electronico</label>
+          <label htmlFor="get_email">correo electrónico</label>
           <input
             type="email"
             id="get_email"
@@ -123,7 +115,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
           <p className={`email_msj ${emailError}`}>
             Introduzca un email valido
           </p>
-          {/* eleccion de contrase;a */}
+          {/* elección de contraseña */}
           <label htmlFor="password1">contraseña</label>
           <input
             type={inputType1}
@@ -133,9 +125,9 @@ function CreateAccount({ windowChange, windowState }: Props) {
           />
             <InputEye operation={changeType1}/>
           <p className={`password_msj ${passwordError}`}>
-            la contraseña debe contener numeros, letras y un caracter especial
+            la contraseña debe contener números, letras y un carácter especial
           </p>
-          {/* validacion la contrase;a */}
+          {/* validación la contraseña */}
           <label htmlFor="password_confirmation">repite tu contraseña</label>
           <input
             type={inputType2}
@@ -147,7 +139,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
           <p
             className={`confirmation_msj ${JSON.stringify(confirmationError)}`}
           >
-            las contraseñas no coninciden
+            las contraseñas no coinciden
           </p>
           {/* captura de nombre de usuario */}
           <label htmlFor="user_name">nombre de usuario</label>

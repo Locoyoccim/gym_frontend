@@ -1,13 +1,7 @@
 import './resultDisplayer.css'
+import { series } from '../../../interfaces'
 
-interface ResultsInfo{
-  peso: number,
-  reps: number,
-  rir: number,
-  recu: number
-}
-
-function Result_Displayer({peso, recu, reps, rir} : ResultsInfo) {
+function Result_Displayer({peso, recu, reps, rir} : series) {
  
   return (
     <div className="results">

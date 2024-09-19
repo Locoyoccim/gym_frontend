@@ -1,22 +1,10 @@
 import { useState } from "react";
 import "./ExerciseCard.css";
 import Result_Displayer from "./Result_Displayer";
+import { CompleteSerie } from "../../../interfaces";
 
-interface SerieProps {
-  peso: number;
-  reps: number;
-  rir: number;
-  recu: number;
-}
 
-interface ExerciseCardProps {
-  name: string;
-  series: SerieProps[];
-  fecha: string;
-  usuario_id: number;
-}
-
-function ExerciseCard({ name, series }: ExerciseCardProps) {
+function ExerciseCard({ name, series }: CompleteSerie) {
   const [arrowTurn, SetArrowTurn] = useState("");
   const [cardHeight, SetCardheight] = useState("");
 

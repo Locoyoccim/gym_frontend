@@ -1,4 +1,5 @@
-import { createContext, useReducer, ReactNode, Dispatch } from "react";
+import { createContext, useReducer, Dispatch } from "react";
+import { childrenContext } from "../../../interfaces";
 
 // Definir el tipo para el estado y la acción
 type Estado = string;
@@ -10,10 +11,6 @@ type ContextType = { estado: Estado; enviar: Enviar };
 
 // Crear el contexto con el tipo correcto
 export const ActualDate = createContext<ContextType | undefined>(undefined);
-
-type Date = {
-  children: ReactNode;
-};
 
 const dateSelected: string = "";
 
@@ -27,7 +24,7 @@ const reductor = (estado: Estado, accion: Action): Estado => {
   }
 };
 
-function SelectDate({ children }: Date) {
+function SelectDate({ children }: childrenContext) {
   // Usar useReducer para manejar el estado
   const [estado, enviar] = useReducer(reductor, dateSelected);
 

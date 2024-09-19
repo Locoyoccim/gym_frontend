@@ -1,16 +1,7 @@
 import "./confirmationModal.css";
 import BtnLoder from "../../Loader/BtnLoader";
+import { modalProps1 } from "../../../../interfaces"; 
 
-interface modalProps {
-  ModalTittle: string;
-  ModalMsj: string;
-  ConfirmationMsj: string;
-  ReturnMsj: string;
-  sendToBackend: () => void;
-  setModalConfirmation: (value: string) => void;
-  ModalState: string;
-  isLoading: boolean;
-}
 
 function ConfirmationModal({
   ModalTittle,
@@ -21,9 +12,9 @@ function ConfirmationModal({
   setModalConfirmation,
   ModalState,
   isLoading,
-}: modalProps) {
+}: modalProps1) {
   return (
-    // ModalState control la apertura y ciere del modal con la clase openConfirmation
+    // ModalState control la apertura y cierre del modal con la clase openConfirmation
 
     <div id="modalConfirmation" className={ModalState}>
       <div className="done-container">

@@ -1,20 +1,12 @@
 import "/src/components/generales/profile/profile.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Navbar from "../../compartidos/navbar/Navbar";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
-interface DataProps{
-  nombre: string,
-  actualizacion: ReactNode,
-  edad: number,
-  peso_kg: number,
-  estatura: number,
-  genero: string
-}
+import { infoUserProps } from "../../../interfaces";
 
 function Profile() {
-  const [userData, setUserData] = useState<DataProps>({
+  const [userData, setUserData] = useState<infoUserProps>({
     nombre: '',
     actualizacion: 0,
     edad: 0,

@@ -1,12 +1,8 @@
-import { ComponentType } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "./memoria/AuthProvider";
+import { ElementComponent } from "../../interfaces";
 
-interface ProtectedRouteProps {
-  Element: ComponentType<any>;
-}
-
-function ProtectedRoute({ Element }: ProtectedRouteProps) {
+function ProtectedRoute({ Element }: ElementComponent) {
   const { isAuthenticated } = useAuth();
   
   return !isAuthenticated ? <Navigate to={'/'} /> : <Element />

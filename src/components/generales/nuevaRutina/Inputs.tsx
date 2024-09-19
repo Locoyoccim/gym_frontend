@@ -1,24 +1,10 @@
-import { ChangeEvent } from "react";
 import "./inputs.css";
+import { series, getSeriesInfo, changeEvent } from "../../../interfaces";
 
-interface serieProps {
-  peso: number;
-  reps: number;
-  rir: number;
-  recu: number;
-}
-
-interface getSeriesInfo {
-  index: number;
-  series: serieProps[];
-  getSeriesInfo: (index: number, prop: keyof serieProps, value: number) => void;
-}
-
-type ofValue = ChangeEvent<HTMLInputElement>;
 
 function Inputs({index, getSeriesInfo }: getSeriesInfo) {
 
-  const onchange = (e: ofValue, prop: keyof serieProps) => {
+  const onchange = (e: changeEvent, prop: keyof series) => {
       const value = parseInt(e.target.value, 10);
       getSeriesInfo(index, prop, value)
   }

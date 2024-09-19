@@ -1,12 +1,10 @@
 import { useState } from "react";
+import { functionEye } from "../../../interfaces";
 import "./inputEye.css";
 
-interface props{
-    operation: () => void
-}
 
-function InputEye( { operation } :props ) {
-  const [eyeAnimation, setEyeAnitmation] = useState<string>("");
+function InputEye( { operation } : functionEye ) {
+  const [eyeAnimation, setEyeAnimation] = useState<string>("");
   return (
     <>
       <button
@@ -14,7 +12,7 @@ function InputEye( { operation } :props ) {
         className={eyeAnimation}
         onClick={(e) => {
           e.preventDefault(),
-            setEyeAnitmation(eyeAnimation === "" ? "animation_in" : ""),
+            setEyeAnimation(eyeAnimation === "" ? "animation_in" : ""),
             operation();
         }}
       >
