@@ -8,10 +8,12 @@ export interface functionEye {
   operation: () => void;
 }
 export interface userProps {
-  id?: number;
-  nombre?: string;
-  email?: string;
-  password?: string;
+  id: number;
+  nombre: string;
+}
+export interface userLogIn{
+  email: string; 
+  password: string;  
 }
 export interface infoUserProps {
   id_user?: number;

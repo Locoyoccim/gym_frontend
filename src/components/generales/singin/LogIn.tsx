@@ -5,7 +5,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { useAuth } from "../../compartidos/memoria/AuthProvider";
 import BtnLoader from "../../compartidos/Loader/BtnLoader";
 import InputEye from "../../compartidos/inputEye/InputEye";
-import { userProps } from "../../../interfaces";
+import { userLogIn } from "../../../interfaces";
 
 interface Props {
   windowChange: (message: string) => void;
@@ -16,7 +16,7 @@ function SingIn({ windowChange }: Props) {
   const navigate = useNavigate();
   const [Loader, setLoader] = useState<boolean>(false);
   const [inputType, setInputType] = useState<string>("password");
-  const [SingInData, SetSingInData] = useState<userProps>({
+  const [SingInData, SetSingInData] = useState<userLogIn>({
     email: "",
     password: "",
   });
