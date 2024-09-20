@@ -77,5 +77,9 @@ export interface getSeriesInfo {
   series: series[];
   getSeriesInfo: (index: number, prop: keyof series, value: number) => void;
 }
-
+export interface AuthContextProps{
+  isAuthenticated: boolean,
+  Login: (token: string) => void;
+  Logout: () => void;
+}
 export type changeEvent = ChangeEvent<HTMLInputElement>;
