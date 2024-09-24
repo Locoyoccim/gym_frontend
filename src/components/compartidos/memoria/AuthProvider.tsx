@@ -1,38 +1,37 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 import { childrenContext, AuthContextProps } from "../../../interfaces";
+import useToken from "../../hooks/useToken";
 
 const defaultAuthContext: AuthContextProps = {
   isAuthenticated: false,
   Login: () => {},
   Logout: () => {},
+  GetToken: () => "",
 };
 
 const AuthContext = createContext<AuthContextProps>(defaultAuthContext);
 
 export function AuthProvider({ children }: childrenContext) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const { getToken, setToken, removeToken } = useToken();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuthenticated(true); // Si el token existe, el usuario está autenticado
-    }
-  }, []);
+  const GetToken = () => getToken() || "";
 
   const Login = (token: string) => {
-    localStorage.setItem("token", token);
+    setToken(token);
     setIsAuthenticated(true);
   };
 
   const Logout = () => {
-    localStorage.removeItem("token");
+    removeToken();
     setIsAuthenticated(false);
-    
   };
 
   return (
     <>
-      <AuthContext.Provider value={{ isAuthenticated, Login, Logout }}>
+      <AuthContext.Provider
+        value={{ isAuthenticated, Login, Logout, GetToken }}
+      >
         {children}
       </AuthContext.Provider>
     </>

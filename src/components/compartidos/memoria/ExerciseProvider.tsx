@@ -1,31 +1,19 @@
-import { createContext, useState, useEffect } from "react";
-import { userProps, childrenContext } from "../../../interfaces";
+import { createContext } from "react";
+import { exerciseProps, childrenContext } from "../../../interfaces";
+import { useAuth } from "./AuthProvider.tsx";
+import GetExercise from "../../../servicios/GetExercise.tsx";
 
-
-export const ExerciseNames = createContext<userProps[]>([]);
+export const ExerciseNames = createContext<exerciseProps[]>([]);
 
 function ExerciseProvider({ children }: childrenContext) {
-  const [FetchData, setFetchData] = useState<userProps[]>([]);
-  const jwt = localStorage.getItem("token");
-
-  useEffect(() => {
-    fetch("https://gymbackend-production.up.railway.app/rutinas/ejercicios_list/", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${jwt}`,
-      },
-    })
-      .then((response) => response.json()) // Convierte la respuesta a JSON
-      .then((data) => {
-        setFetchData(data);
-      })
-      .catch((error) => console.error("Error:", error)); // Maneja errores
-  }, []);
+  const { GetToken } = useAuth();
+  const jwt = GetToken();
+  const { data } = GetExercise("ejercicios_list/", jwt);
 
   return (
-    <ExerciseNames.Provider value={FetchData}>
+    <ExerciseNames.Provider value={data}>
       {children}
-    </ExerciseNames.Provider>
+      </ExerciseNames.Provider>
   );
 }
 

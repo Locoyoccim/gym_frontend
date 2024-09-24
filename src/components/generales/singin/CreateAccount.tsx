@@ -5,12 +5,13 @@ import { useAuth } from "../../compartidos/memoria/AuthProvider";
 import BtnLoader from "../../compartidos/Loader/BtnLoader";
 import InputEye from "../../compartidos/inputEye/InputEye";
 import { changeEvent, dataUserProps } from "../../../interfaces";
+import axios from "axios";
+import { Api_Url } from "../../../servicios/config";
 
 interface Props {
   windowChange: (message: string) => void;
   windowState: string;
 }
-
 
 function CreateAccount({ windowChange, windowState }: Props) {
   const [inputType1, setInput1Type] = useState<string>("password");
@@ -43,57 +44,43 @@ function CreateAccount({ windowChange, windowState }: Props) {
   // Validación de datos y actualización del estado
   const inputsValidations = (e: changeEvent, inputName: string) => {
     setData({ ...data, [inputName]: e.target.value });
+    const value = e.target.value;
     switch (inputName) {
       case "email":
-        if (e.target.value === "") {
-          setEmailError("");
-        } else {
-          setEmailError(emailRegex.test(e.target.value) ? "" : "invalidEmail");
-        }
+        // Validamos primero si el values esta vació, después si el regex coincide con el texto
+        value === ""
+          ? setEmailError("")
+          : setEmailError(emailRegex.test(value) ? "" : "invalidEmail");
         break;
       case "password":
-        if (e.target.value === "") {
-          setPasswordError("");
-        } else {
-          setPasswordError(
-            passwordRegex.test(e.target.value) ? "" : "invalidPassword"
-          );
-        }
+        value === ""
+          ? setPasswordError("")
+          : passwordRegex.test(value)
+          ? ""
+          : "invalidPassword";
         break;
       case "passwordConfirmation":
-        if (data.password != e.target.value) {
-          setConfirmationError(false);
-        } else {
-          setConfirmationError(true);
-        }
+        data.password != value
+          ? setConfirmationError(false)
+          : setConfirmationError(true);
         break;
     }
   };
   // envió de datos del usuario al Backend
-  const SendDataBackEnd = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(
-        "https://gymbackend-production.up.railway.app/rutinas/crear-usuario/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
-      if (!response.ok) throw new Error("Error en la solicitud");
-      const result = await response.json();
-      console.log("Datos enviados Exitosamente", result);
-      setLoading(false);
-      Login(result.access);
-      const id_user = result.id;
-      return navigate(`/userRegistration/${id_user}`);
-    } catch {
-      console.error("Error al enviar información:", Error);
-      setLoading(false);
-    }
+  const SendDataBackEnd = () => {
+    setLoading(true);
+    axios.post(`${Api_Url}/crear-usuario/`, data)
+      .then((response) => {
+        console.log("Envió con éxito");
+        Login(response.data.access);
+        navigate(`/userRegistration/${response.data.id}`);
+      })
+      .catch((error) => {
+        console.log(error, "Error al enviar datos");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -111,6 +98,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
             id="get_email"
             autoComplete="email"
             onChange={(e) => inputsValidations(e, "email")}
+            required
           />
           <p className={`email_msj ${emailError}`}>
             Introduzca un email valido
@@ -122,8 +110,9 @@ function CreateAccount({ windowChange, windowState }: Props) {
             id="password1"
             autoComplete="new-password"
             onChange={(e) => inputsValidations(e, "password")}
+            required
           />
-            <InputEye operation={changeType1}/>
+          <InputEye operation={changeType1} />
           <p className={`password_msj ${passwordError}`}>
             la contraseña debe contener números, letras y un carácter especial
           </p>
@@ -134,8 +123,9 @@ function CreateAccount({ windowChange, windowState }: Props) {
             id="password_confirmation"
             autoComplete="new-password"
             onChange={(e) => inputsValidations(e, "passwordConfirmation")}
+            required
           />
-            <InputEye operation={changeType2}/>
+          <InputEye operation={changeType2} />
           <p
             className={`confirmation_msj ${JSON.stringify(confirmationError)}`}
           >
@@ -148,6 +138,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
             id="user_name"
             autoComplete="username"
             onChange={(e) => inputsValidations(e, "username")}
+            required
           />
           {/* nombres de nombre */}
           <label htmlFor="nombres">nombres</label>
@@ -156,6 +147,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
             id="nombres"
             autoComplete="name"
             onChange={(e) => inputsValidations(e, "nombre")}
+            required
           />
           {/* apellidos */}
           <label htmlFor="apellidos">apellidos</label>
@@ -164,6 +156,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
             id="apellidos"
             autoComplete="family-name"
             onChange={(e) => inputsValidations(e, "apellidos")}
+            required
           />
         </form>
         <div className="singin_buttons">

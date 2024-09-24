@@ -4,16 +4,16 @@ import { SerieContext } from "../../memoria/SeriesContext";
 import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import ModalResult from "./ModalResults";
-import { changeEvent, CompleteSerie, userProps, ModalProps2 } from "../../../../interfaces";
+import { changeEvent, CompleteSerie, exerciseProps, ModalProps2 } from "../../../../interfaces";
 
 
 function Modal({ modalState, setShowModal }: ModalProps2) {
   const { id_user } = useParams();
   const num_id: number = parseInt(id_user ?? "", 10);
   // Manejo del nombre ejercicio
-  const ExerciseData: userProps[] = useContext(ExerciseNames);
+  const ExerciseData: exerciseProps[] = useContext(ExerciseNames);
   const [inputValue, setInputValue] = useState<string>();
-  const [filterData, setFilterData] = useState<userProps[]>(ExerciseData);
+  const [filterData, setFilterData] = useState<exerciseProps[]>(ExerciseData);
   const [showOptions, setShowOptions] = useState<string>("");
 
   // Data de las series de acuerdo al nombre del ejercicio
@@ -26,7 +26,7 @@ function Modal({ modalState, setShowModal }: ModalProps2) {
   );
 
   //Busca el nombre del ejercicio de acuerdo a los valores del input
-  function getExerciseName(e: changeEvent, list: userProps[]) {
+  function getExerciseName(e: changeEvent, list: exerciseProps[]) {
     setInputValue(e.target.value);
     const lowerCaseInput = e.target.value.toLowerCase();
     const matches = list.filter((item) =>

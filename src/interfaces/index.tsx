@@ -7,7 +7,7 @@ export interface functions {
 export interface functionEye {
   operation: () => void;
 }
-export interface userProps {
+export interface exerciseProps {
   id: number;
   nombre: string;
 }
@@ -81,5 +81,9 @@ export interface AuthContextProps{
   isAuthenticated: boolean,
   Login: (token: string) => void;
   Logout: () => void;
+  GetToken: () => string;
+}
+export interface functionLogin {
+  windowChange: (message: string) => void;
 }
 export type changeEvent = ChangeEvent<HTMLInputElement>;

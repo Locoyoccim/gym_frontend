@@ -7,8 +7,8 @@ export const SerieContext = createContext<CompleteSerie[]>([]);
 
 function SeriesContext({ children }: childrenContext) {
   const [FetchData, setFetchData] = useState<CompleteSerie[]>([]);
-  const { isAuthenticated } = useAuth();
-  const jwt = localStorage.getItem('token')
+  const { isAuthenticated, GetToken } = useAuth();
+  const jwt = GetToken()
 
   useEffect(() => {
     fetch("https://gymbackend-production.up.railway.app/rutinas/series/", {

@@ -2,7 +2,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./navbar.css";
 import navImg from "/muscle-arm-svgrepo-com.svg";
 import { useState } from "react";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../memoria/AuthProvider";
 import Cronometro from "../stopwatch/Cronometro";
 
@@ -11,6 +11,7 @@ function Navbar() {
   const { id_user } = useParams();
   const { Logout } = useAuth();
   const location = useLocation()
+  const navigate = useNavigate();
 
   const navButton = (newState: string) => {
     setNavState(newState);
@@ -39,7 +40,7 @@ function Navbar() {
             <Link to={`/profile/${id_user}`}> Mi Perfil</Link>
           </li>
           <li>
-            <button className="log_out" onClick={() => Logout()}>
+            <button className="log_out" onClick={() => {Logout(), navigate("/")}}>
               Cerrar Sesión
             </button>
           </li>
