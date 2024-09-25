@@ -2,7 +2,6 @@ import { ReactNode, ChangeEvent, ComponentType } from "react";
 
 export interface functions {
   setModalConfirmation: (value: string) => void;
-  setShowModal: (value: string) => void;
 }
 export interface functionEye {
   operation: () => void;
@@ -11,9 +10,9 @@ export interface exerciseProps {
   id: number;
   nombre: string;
 }
-export interface userLogIn{
-  email: string; 
-  password: string;  
+export interface userLogIn {
+  email: string;
+  password: string;
 }
 export interface infoUserProps {
   id_user?: number;
@@ -67,6 +66,7 @@ export interface modalProps1 {
 export interface ModalProps2 {
   modalState: string;
   setShowModal: (e: string) => void;
+  name: string;
 }
 export interface getInputValues {
   index: number;
@@ -77,8 +77,8 @@ export interface getSeriesInfo {
   series: series[];
   getSeriesInfo: (index: number, prop: keyof series, value: number) => void;
 }
-export interface AuthContextProps{
-  isAuthenticated: boolean,
+export interface AuthContextProps {
+  isAuthenticated: boolean;
   Login: (token: string) => void;
   Logout: () => void;
   GetToken: () => string;

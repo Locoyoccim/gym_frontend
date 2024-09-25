@@ -15,10 +15,10 @@ export const ActualDate = createContext<ContextType | undefined>(undefined);
 const dateSelected: string = "";
 
 // Reductor para manejar el estado
-const reductor = (estado: Estado, accion: Action): Estado => {
-  switch (accion.tipo) {
+const reductor = (estado: Estado, action: Action): Estado => {
+  switch (action.tipo) {
     case "update":
-      return accion.value;
+      return action.value;
     default:
       return estado;
   }

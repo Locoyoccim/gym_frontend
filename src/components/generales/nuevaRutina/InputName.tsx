@@ -3,8 +3,13 @@ import { useState, useContext, useEffect } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./inputName.css";
 import { ExerciseNames } from "../../compartidos/memoria/ExerciseProvider";
-import { userProps, getInputValues, changeEvent, series } from "../../../interfaces";
-
+import {
+  exerciseProps,
+  getInputValues,
+  changeEvent,
+  series,
+} from "../../../interfaces";
+import Modal from "../../compartidos/modal/ModalExercise/Modal";
 
 function InputName({ index, getInputValues }: getInputValues) {
   const [series, setSeries] = useState<series[]>([
@@ -15,11 +20,12 @@ function InputName({ index, getInputValues }: getInputValues) {
       recu: 0,
     },
   ]);
-  const ExerciseData: userProps[] = useContext(ExerciseNames);
+  const ExerciseData: exerciseProps[] = useContext(ExerciseNames);
   const [filterExerciseData, setFilterExerciseData] = useState(ExerciseData);
   const [exerciseList, setExerciseList] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
   const [exerciseId, setExerciseId] = useState<number>(0);
+  const [showModal, setShowModal] = useState<string>("");
 
   // carga de información del usuario
   const getSeriesInfo = (
@@ -79,7 +85,7 @@ function InputName({ index, getInputValues }: getInputValues) {
   }
 
   // Encargada de filtrar y rederizar el ejercicio buscado
-  function getInputValue(e: changeEvent, list: userProps[]) {
+  function getInputValue(e: changeEvent, list: exerciseProps[]) {
     setInputValue(e.target.value);
     const lowerCaseInput = e.target.value.toLowerCase();
     const matches = list.filter((item) =>
@@ -90,6 +96,7 @@ function InputName({ index, getInputValues }: getInputValues) {
 
   return (
     <>
+      <Modal modalState={showModal} setShowModal={setShowModal} name={inputValue} />
       <label className="exercise_name">
         <input
           type="text"
@@ -99,6 +106,9 @@ function InputName({ index, getInputValues }: getInputValues) {
             getInputValue(e, ExerciseData), exerciseOptions("display");
           }}
         />
+        <button className="history_display" onClick={() => setShowModal('open_modal')}>
+          <i className="bi bi-clipboard-data-fill"></i>
+        </button>
         <div className={`exercise_list ${exerciseList}`}>
           {/* Regresa lista de ejercicios traída del BE */}
           {filterExerciseData.map((item) => (

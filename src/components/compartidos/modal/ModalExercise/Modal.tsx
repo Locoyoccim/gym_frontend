@@ -1,13 +1,12 @@
 import "./modal.css";
-import { ExerciseNames } from "../../memoria/ExerciseProvider"; 
+import { ExerciseNames } from "../../memoria/ExerciseProvider";
 import { SerieContext } from "../../memoria/SeriesContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ModalResult from "./ModalResults";
 import { changeEvent, CompleteSerie, exerciseProps, ModalProps2 } from "../../../../interfaces";
 
-
-function Modal({ modalState, setShowModal }: ModalProps2) {
+function Modal({ modalState, setShowModal, name }: ModalProps2) {
   const { id_user } = useParams();
   const num_id: number = parseInt(id_user ?? "", 10);
   // Manejo del nombre ejercicio
@@ -24,6 +23,11 @@ function Modal({ modalState, setShowModal }: ModalProps2) {
   const exercise_history: CompleteSerie[] = user_exercise.filter(
     (item) => item.name === inputValue
   );
+
+  // Cambian el valor del input con los cambio que vienen del componente padre
+  useEffect(() => {
+    setInputValue(name);
+  }, [name]);
 
   //Busca el nombre del ejercicio de acuerdo a los valores del input
   function getExerciseName(e: changeEvent, list: exerciseProps[]) {
@@ -51,9 +55,15 @@ function Modal({ modalState, setShowModal }: ModalProps2) {
           className="check_exercise"
           onChange={(e) => getExerciseName(e, ExerciseData)}
           value={inputValue}
-          name="exeercice_name"
+          name="exercise_name"
         />
-        <button type="button" id="clear_btn" onClick={(e) => {e.preventDefault() ,setInputValue('')}}>
+        <button
+          type="button"
+          id="clear_btn"
+          onClick={(e) => {
+            e.preventDefault(), setInputValue("");
+          }}
+        >
           <i className="bi bi-x-octagon-fill"></i>
         </button>
       </form>

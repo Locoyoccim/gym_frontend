@@ -3,7 +3,7 @@ import Timer from "../../compartidos/stopwatch/Timer";
 import { functions } from "../../../interfaces";
 
 
-function Footer({ setModalConfirmation, setShowModal }: functions) {
+function Footer({ setModalConfirmation }: functions) {
   return (
     <>
       <section className={`footer`}>
@@ -16,7 +16,7 @@ function Footer({ setModalConfirmation, setShowModal }: functions) {
           Finalizar
         </button>
         <Timer />
-        <button className="historia_btn" onClick={() => setShowModal("open_modal")}>
+        <button className="historia_btn" >
           Historia
         </button>
       </section>

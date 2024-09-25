@@ -4,10 +4,12 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import Navbar from "../../compartidos/navbar/Navbar";
 import InputExercise from "./InputName";
 import Footer from "../footer/Footer";
-import Modal from "../../compartidos/modal/ModalExercise/Modal.tsx";
 import ConfirmationModal from "../../compartidos/modal/confitmationModal/ConfirmationModal.tsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { series, CompleteSerie } from "../../../interfaces/index.tsx";
+import axios from "axios";
+import { Api_Url } from "../../../servicios/config.ts";
+import useToken from "../../hooks/useToken.tsx";
 
 //Obtener el dia en curso
 const getCurrentDate = (): string => {
@@ -24,9 +26,9 @@ function NuevaRutina() {
   const navigate = useNavigate();
   const { id_user } = useParams();
   const UserId: number = id_user ? parseInt(id_user, 10) : 0;
-  const [showModal, setShowModal] = useState<string>("");
-  const [modalConfirmation, setModalConfirmation] = useState<string>('')
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [modalConfirmation, setModalConfirmation] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { getToken } = useToken();
 
   // trae la información de los componentes hijos
   const getInputValues = (
@@ -82,38 +84,26 @@ function NuevaRutina() {
   };
 
   // Envía datos al Backend
-
   const sendToBackend = async () => {
-    const jwt = localStorage.getItem("token");
-    setIsLoading(true)
-    try {
-      const response = await fetch(
-        "https://gymbackend-production.up.railway.app/rutinas/series/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${jwt}`,
-          },
-          body: JSON.stringify(userExercise),
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Error al enviar su rutina");
-      }
-      const data = await response.json();
-      setIsLoading(false)
-      console.log("Datos enviados Exitosamente", data);
-      return navigate(`/dashboard/${id_user}`);
-    } catch (error) {
-      console.log("Error", error);
-      setIsLoading(false)
-    }
+    setIsLoading(true);
+    axios
+      .post(`${Api_Url}/series`, userExercise, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((resp) => {
+        console.log("Datos enviados Exitosamente", resp.data);
+        navigate(`/dashboard/${id_user}`);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
     <>
-      <Modal modalState={showModal} setShowModal={setShowModal} />
       <ConfirmationModal
         ModalTittle="gran entrenamiento"
         ModalMsj="ahora solo envía tu rutina, disfruta el descanso y recuperación"
@@ -147,7 +137,9 @@ function NuevaRutina() {
           </button>
         </div>
       </section>
-      <Footer setModalConfirmation={setModalConfirmation} setShowModal={setShowModal} />
+      <Footer
+        setModalConfirmation={setModalConfirmation}
+      />
     </>
   );
 }
