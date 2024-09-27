@@ -1,16 +1,9 @@
-import { createContext, useReducer, Dispatch } from "react";
-import { childrenContext } from "../../../interfaces";
+import { createContext, useReducer } from "react";
+import { childrenContext, ContextDate, Estado, Action } from "../../../interfaces";
 
-// Definir el tipo para el estado y la acción
-type Estado = string;
-type Action = { tipo: string; value: string };
-type Enviar = Dispatch<Action>;
-
-// Definir el tipo para el contexto
-type ContextType = { estado: Estado; enviar: Enviar };
 
 // Crear el contexto con el tipo correcto
-export const ActualDate = createContext<ContextType | undefined>(undefined);
+export const ActualDate = createContext<ContextDate | undefined>(undefined);
 
 const dateSelected: string = "";
 

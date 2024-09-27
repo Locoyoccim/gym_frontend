@@ -137,9 +137,7 @@ function NuevaRutina() {
           </button>
         </div>
       </section>
-      <Footer
-        setModalConfirmation={setModalConfirmation}
-      />
+      <Footer setModalConfirmation={setModalConfirmation} />
     </>
   );
 }

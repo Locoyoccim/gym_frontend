@@ -1,4 +1,4 @@
-import { ReactNode, ChangeEvent, ComponentType } from "react";
+import { ReactNode, ChangeEvent, ComponentType, Dispatch } from "react";
 
 export interface functions {
   setModalConfirmation: (value: string) => void;
@@ -87,3 +87,13 @@ export interface functionLogin {
   windowChange: (message: string) => void;
 }
 export type changeEvent = ChangeEvent<HTMLInputElement>;
+
+//Tipos del contexto date
+export type Action = { tipo: string; value: string };
+export type Estado = string
+export type Enviar = Dispatch<Action>;
+
+export type ContextDate = {
+  estado: Estado;
+  enviar: Enviar;
+};

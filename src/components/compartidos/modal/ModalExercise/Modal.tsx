@@ -11,7 +11,7 @@ function Modal({ modalState, setShowModal, name }: ModalProps2) {
   const num_id: number = parseInt(id_user ?? "", 10);
   // Manejo del nombre ejercicio
   const ExerciseData: exerciseProps[] = useContext(ExerciseNames);
-  const [inputValue, setInputValue] = useState<string>();
+  const [inputValue, setInputValue] = useState<string>('');
   const [filterData, setFilterData] = useState<exerciseProps[]>(ExerciseData);
   const [showOptions, setShowOptions] = useState<string>("");
 
