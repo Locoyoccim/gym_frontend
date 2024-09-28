@@ -82,18 +82,20 @@
   transition: 1s all ease;
 }
 #search_result {
-  height: 73%;
+  max-height: 70%;
   border: var(--borders) 2px solid;
   border-radius: 10px;
   padding: 10px;
+  margin-top: 15px;
   text-align: center;
-  margin-top: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 #search_result p {
   font-size: 17px;
 }
 .result_fecha {
-  width: 80px;
+  width: 81px;
 }
 .result {
   width: 50px;

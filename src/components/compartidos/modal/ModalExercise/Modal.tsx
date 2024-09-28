@@ -4,22 +4,26 @@ import { SerieContext } from "../../memoria/SeriesContext";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ModalResult from "./ModalResults";
-import { changeEvent, CompleteSerie, exerciseProps, ModalProps2 } from "../../../../interfaces";
+import {
+  changeEvent,
+  CompleteSerie,
+  exerciseProps,
+  ModalProps2,
+} from "../../../../interfaces";
 
 function Modal({ modalState, setShowModal, name }: ModalProps2) {
   const { id_user } = useParams();
   const num_id: number = parseInt(id_user ?? "", 10);
   // Manejo del nombre ejercicio
   const ExerciseData: exerciseProps[] = useContext(ExerciseNames);
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>("");
   const [filterData, setFilterData] = useState<exerciseProps[]>(ExerciseData);
   const [showOptions, setShowOptions] = useState<string>("");
 
   // Data de las series de acuerdo al nombre del ejercicio
-  const seriesData: CompleteSerie[] = useContext(SerieContext);
-  const user_exercise: CompleteSerie[] = seriesData.filter(
-    (item) => item.usuario_id === num_id
-  );
+  const seriesData = useContext(SerieContext);
+  const user_exercise: CompleteSerie[] =
+    seriesData?.estado.filter((item) => item.usuario_id === num_id) || [];
   const exercise_history: CompleteSerie[] = user_exercise.filter(
     (item) => item.name === inputValue
   );

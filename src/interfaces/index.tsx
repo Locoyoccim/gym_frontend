@@ -93,7 +93,16 @@ export type Action = { tipo: string; value: string };
 export type Estado = string
 export type Enviar = Dispatch<Action>;
 
-export type ContextDate = {
+export type ReducerDate = {
   estado: Estado;
   enviar: Enviar;
 };
+
+// Tipos del contexto 
+export type ActionSeries = { tipo: string; value: CompleteSerie[] };
+export type EnviarSeries = Dispatch<ActionSeries>
+
+export type ReducerSeries ={
+  estado: CompleteSerie[];
+  enviar: EnviarSeries;
+}

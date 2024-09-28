@@ -1,9 +1,9 @@
 import { createContext, useReducer } from "react";
-import { childrenContext, ContextDate, Estado, Action } from "../../../interfaces";
+import { childrenContext, ReducerDate, Estado, Action } from "../../../interfaces";
 
 
 // Crear el contexto con el tipo correcto
-export const ActualDate = createContext<ContextDate | undefined>(undefined);
+export const ActualDate = createContext<ReducerDate | undefined>(undefined);
 
 const dateSelected: string = "";
 

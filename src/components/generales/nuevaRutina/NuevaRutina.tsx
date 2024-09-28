@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./nuevaRutina.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Navbar from "../../compartidos/navbar/Navbar";
@@ -10,6 +10,7 @@ import { series, CompleteSerie } from "../../../interfaces/index.tsx";
 import axios from "axios";
 import { Api_Url } from "../../../servicios/config.ts";
 import useToken from "../../hooks/useToken.tsx";
+import { SerieContext } from "../../compartidos/memoria/SeriesContext.tsx";
 
 //Obtener el dia en curso
 const getCurrentDate = (): string => {
@@ -24,6 +25,7 @@ const getCurrentDate = (): string => {
 function NuevaRutina() {
   const [userExercise, setUserExercise] = useState<CompleteSerie[]>([]);
   const navigate = useNavigate();
+  const userSeries = useContext(SerieContext);
   const { id_user } = useParams();
   const UserId: number = id_user ? parseInt(id_user, 10) : 0;
   const [modalConfirmation, setModalConfirmation] = useState<string>("");
@@ -95,6 +97,7 @@ function NuevaRutina() {
       })
       .then((resp) => {
         console.log("Datos enviados Exitosamente", resp.data);
+        userSeries?.enviar({ tipo: "agregar", value: resp.data});
         navigate(`/dashboard/${id_user}`);
       })
       .finally(() => {
