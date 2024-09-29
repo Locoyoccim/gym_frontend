@@ -13,7 +13,7 @@ function ExerciseProvider({ children }: childrenContext) {
   return (
     <ExerciseNames.Provider value={data}>
       {children}
-      </ExerciseNames.Provider>
+    </ExerciseNames.Provider>
   );
 }
 
