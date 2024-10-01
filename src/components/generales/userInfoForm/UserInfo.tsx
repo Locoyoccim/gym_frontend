@@ -1,11 +1,13 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../userInfoForm/userInfo.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BtnLoader from "../../compartidos/Loader/BtnLoader";
 import { infoUserProps, changeEvent } from "../../../interfaces";
-
-
+import axios from "axios";
+import { Api_Url } from "../../../servicios/config";
+import GetUserInfo from "../../../servicios/GetUserInfo";
+import useToken from "../../hooks/useToken";
 
 const getCurrentDate = (): string => {
   const today = new Date();
@@ -14,50 +16,81 @@ const getCurrentDate = (): string => {
   const day = String(today.getDate()).padStart(2, "0");
   const date = `${year}-${month}-${day}`;
   return date;
-}
+};
 
 function UserInfo() {
-  const { id_user } = useParams<{id_user: string}>() 
-  const [Loading, setLoading] = useState<boolean>(false)
-  const navigate = useNavigate()
-  const [userData, setUserData] = useState<infoUserProps>(
-    {
-      id_user: id_user ? parseInt(id_user, 10) : 0,
-      actualizacion: getCurrentDate(),
-      edad: 0,
-      peso_kg: 0,
-      estatura: 0,
-      genero: "m",
-    },
-  );
+  const { getToken } = useToken();
+  const { id_user } = useParams<{ id_user: string }>();
+  const { data } = GetUserInfo(`userinfo/${id_user}/`, getToken());
+  const [Loading, setLoading] = useState<boolean>(false);
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState<infoUserProps>({
+    id_user: id_user ? parseInt(id_user, 10) : 0,
+    actualizacion: getCurrentDate(),
+    edad: 0,
+    peso_kg: 0,
+    estatura: 0,
+    genero: "m",
+  });
 
   const { edad, peso_kg, estatura, genero } = userData;
-  
+
   // Actualiza la información del usuario
   const dataChange = (e: changeEvent, field: keyof infoUserProps) => {
-    setUserData({...userData, [field]:e.target.value})
+    setUserData({ ...userData, [field]: e.target.value });
   };
 
-  const SendToBackEnd = async () =>{
-    try {
-      setLoading(true)
-      const response = await fetch("https://gymbackend-production.up.railway.app/rutinas/newuserinfo/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
-      if (!response.ok) throw new Error("Error en la solicitud");
-      const result = await response.json();
-      console.log("Datos enviados Exitosamente", result);
-      setLoading(false)
-      return navigate('/');
-    } catch {
-      console.error("Error al enviar información:", Error);
-      setLoading(false)
+  useEffect(() => {
+    setIsEditMode(!!data); // Si hay data, estamos en modo edición, por lo tanto isEditMode será true
+    if (data) {
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        ...data, // Actualizamos los valores de userData con los de data
+      }));
     }
-  }
+  }, [data]);
+
+  const SendToBackEnd = () => {
+    setLoading(true);
+    if (isEditMode) {
+      axios
+        .put(`${Api_Url}/userinfo/${id_user}`, userData, {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setLoading(false);
+          navigate(`/profile/${id_user}`);
+        });
+    } else {
+      axios
+        .post(`${Api_Url}/newuserinfo/`, userData, {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setLoading(false);
+          navigate("/");
+        });
+    }
+  };
 
   return (
     <section id="userInfo_section">
@@ -65,7 +98,7 @@ function UserInfo() {
         <div id="userInfo_img">
           <i className="bi bi-person-rolodex"></i>
         </div>
-        <h1>creando perfil</h1>
+        <h1>{isEditMode ? "Editar Peril" : "Creando Perfil"}</h1>
         <form action="" id="collect_userinfo">
           <label htmlFor="age">cual es tu edad?</label>
           <input
@@ -100,9 +133,8 @@ function UserInfo() {
           />
         </form>
         <button className="crear" onClick={SendToBackEnd}>
-          {!Loading ? <p>enviar</p> : <BtnLoader /> }
-          </button>
-        
+          {!Loading ? <p>enviar</p> : <BtnLoader />}
+        </button>
       </div>
     </section>
   );

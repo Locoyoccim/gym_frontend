@@ -39,3 +39,9 @@
 .data span{
   text-transform: capitalize;
 }
+.btn_edit{
+  border: none;
+  background: none;
+  font-size: 26px;
+  margin-left: 15px;
+}
