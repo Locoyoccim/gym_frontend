@@ -30,7 +30,7 @@ function SeriesContext({ children }: childrenContext) {
     }
   };
 
-  const initState = reductor([], { tipo: "agregar", value: data });
+  const initState:CompleteSerie[] = [];
   const [estado, enviar] = useReducer(reductor, initState);
 
   useEffect(() => {

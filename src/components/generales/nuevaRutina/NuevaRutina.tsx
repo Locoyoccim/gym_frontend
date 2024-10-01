@@ -51,7 +51,7 @@ function NuevaRutina() {
       return newData;
     });
   };
-
+  
   // manejo de la cantidad de lineas para inputs de ejercicios
   const [inputExercise, setInputExercise] = useState([
     [<InputExercise key={0} getInputValues={getInputValues} index={0} />],
@@ -84,12 +84,12 @@ function NuevaRutina() {
       setUserExercise(userExercise.slice(0, -1));
     }
   };
-
+  
   // Envía datos al Backend
   const sendToBackend = async () => {
     setIsLoading(true);
     axios
-      .post(`${Api_Url}/series`, userExercise, {
+      .post(`${Api_Url}/series/`, userExercise, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
           "Content-Type": "application/json",
