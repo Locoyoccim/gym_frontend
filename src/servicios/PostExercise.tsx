@@ -19,10 +19,10 @@ function usePostExercise() {
       .then((response) => {
         context?.enviar({ tipo: "agregar", ejercicio: response.data });
         console.log(response.data);
+        setIsCreated(true);
       })
       .catch((error) => {
         console.log(error);
-        setIsCreated(true);
       })
       .finally(() => {
         setIsLoading(false);
