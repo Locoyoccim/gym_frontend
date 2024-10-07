@@ -25,7 +25,7 @@ const GetExercise = (Endpoint: string, token: string) => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [token]);
 
   return { data, loading, error };
 };

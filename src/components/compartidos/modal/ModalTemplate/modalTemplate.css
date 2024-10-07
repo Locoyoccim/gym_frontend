@@ -1,0 +1,13 @@
+@import url("../../colors.css");
+
+#modalTemplate {
+  background: var(--bg_card_gradient);
+  position: fixed;
+  top: 30%;
+  left: 5.5%;
+  width: 90%;
+  height: 41vh;
+  min-height: max-content;
+  z-index: 7;
+  border-radius: 15px;
+}

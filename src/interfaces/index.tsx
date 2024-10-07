@@ -1,7 +1,13 @@
 import { ReactNode, ChangeEvent, ComponentType, Dispatch } from "react";
 
+export interface NotificationTypes{
+  tittle: string
+  isOpen: boolean
+} 
+
 export interface functions {
   setModalConfirmation: (value: string) => void;
+  handleModal: () => void
 }
 export interface functionEye {
   operation: () => void;
@@ -9,7 +15,7 @@ export interface functionEye {
 export interface exerciseProps {
   id: number;
   nombre: string;
-}
+}``
 export interface userLogIn {
   email: string;
   password: string;
@@ -105,4 +111,13 @@ export type EnviarSeries = Dispatch<ActionSeries>
 export type ReducerSeries ={
   estado: CompleteSerie[];
   enviar: EnviarSeries;
+}
+
+// Tipos para reductor ejercicios
+export type ActionExercise =  {tipo: string, ejercicio: exerciseProps[] }
+export type EnviarExercise = Dispatch<ActionExercise>
+
+export type ReducerExercise = {
+  estado: exerciseProps[];
+  enviar: EnviarExercise;
 }

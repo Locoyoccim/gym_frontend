@@ -43,7 +43,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
 
   // Validación de datos y actualización del estado
   const inputsValidations = (e: changeEvent, inputName: string) => {
-    setData({ ...data, [inputName]: e.target.value });
+    setData({ ...data, [inputName]: e.target.value.trim() });
     const value = e.target.value;
     switch (inputName) {
       case "email":

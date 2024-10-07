@@ -20,8 +20,9 @@ function InputName({ index, getInputValues }: getInputValues) {
       recu: 0,
     },
   ]);
-  const ExerciseData: exerciseProps[] = useContext(ExerciseNames);
-  const [filterExerciseData, setFilterExerciseData] = useState(ExerciseData);
+  const context = useContext(ExerciseNames);
+  const ExerciseData = context?.estado;
+  const [filterExerciseData, setFilterExerciseData] = useState(ExerciseData || []);
   const [exerciseList, setExerciseList] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
   const [exerciseId, setExerciseId] = useState<number>(0);
@@ -103,7 +104,7 @@ function InputName({ index, getInputValues }: getInputValues) {
           placeholder="Nombre de ejercicio..."
           value={inputValue}
           onChange={(e) => {
-            getInputValue(e, ExerciseData), exerciseOptions("display");
+            getInputValue(e, ExerciseData || []), exerciseOptions("display");
           }}
         />
         <button className="history_display" onClick={() => setShowModal('open_modal')}>

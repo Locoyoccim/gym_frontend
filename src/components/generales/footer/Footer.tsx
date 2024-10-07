@@ -2,8 +2,7 @@ import "./footer.css";
 import Timer from "../../compartidos/stopwatch/Timer";
 import { functions } from "../../../interfaces";
 
-
-function Footer({ setModalConfirmation }: functions) {
+function Footer({ setModalConfirmation, handleModal }: functions) {
   return (
     <>
       <section className={`footer`}>
@@ -16,11 +15,10 @@ function Footer({ setModalConfirmation }: functions) {
           Finalizar
         </button>
         <Timer />
-        <button className="historia_btn" >
-          Historia
+        <button className="historia_btn" onClick={() => handleModal()}>
+          <i className="bi bi-node-plus"></i>
         </button>
       </section>
-      
     </>
   );
 }

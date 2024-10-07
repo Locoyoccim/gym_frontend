@@ -1,0 +1,10 @@
+#response_container{
+    background: var(--dark_red_light);
+    color: var(--text);
+    text-align: center;
+    padding: 10px;
+    width: 80%;
+    border-radius: 15px;
+    position: absolute;
+    text-transform: capitalize;
+}

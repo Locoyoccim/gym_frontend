@@ -11,6 +11,8 @@ import axios from "axios";
 import { Api_Url } from "../../../servicios/config.ts";
 import useToken from "../../hooks/useToken.tsx";
 import { SerieContext } from "../../compartidos/memoria/SeriesContext.tsx";
+import ModalTemplate from "../../compartidos/modal/ModalTemplate/ModalTemplate.tsx";
+import AddExercise from "../../compartidos/AddExerciseList/AddExercise.tsx";
 
 //Obtener el dia en curso
 const getCurrentDate = (): string => {
@@ -31,6 +33,7 @@ function NuevaRutina() {
   const [modalConfirmation, setModalConfirmation] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { getToken } = useToken();
+  const [showModal, setShowModal] = useState(false);
 
   // trae la información de los componentes hijos
   const getInputValues = (
@@ -51,7 +54,7 @@ function NuevaRutina() {
       return newData;
     });
   };
-  
+
   // manejo de la cantidad de lineas para inputs de ejercicios
   const [inputExercise, setInputExercise] = useState([
     [<InputExercise key={0} getInputValues={getInputValues} index={0} />],
@@ -84,7 +87,7 @@ function NuevaRutina() {
       setUserExercise(userExercise.slice(0, -1));
     }
   };
-  
+
   // Envía datos al Backend
   const sendToBackend = async () => {
     setIsLoading(true);
@@ -97,12 +100,17 @@ function NuevaRutina() {
       })
       .then((resp) => {
         console.log("Datos enviados Exitosamente", resp.data);
-        userSeries?.enviar({ tipo: "agregar", value: resp.data});
+        userSeries?.enviar({ tipo: "agregar", value: resp.data });
         navigate(`/dashboard/${id_user}`);
       })
       .finally(() => {
         setIsLoading(false);
       });
+  };
+
+  //Manejo del estado del Modal agregar nuevo ejercicio
+  const handleModal = () => {
+    setShowModal(showModal ? false : true);
   };
 
   return (
@@ -117,6 +125,7 @@ function NuevaRutina() {
         setModalConfirmation={setModalConfirmation}
         isLoading={isLoading}
       />
+      <ModalTemplate isOpen={showModal} Element={AddExercise} />
       <Navbar />
       <section id="nueva_rutina">
         <button
@@ -140,7 +149,10 @@ function NuevaRutina() {
           </button>
         </div>
       </section>
-      <Footer setModalConfirmation={setModalConfirmation} />
+      <Footer
+        handleModal={handleModal}
+        setModalConfirmation={setModalConfirmation}
+      />
     </>
   );
 }

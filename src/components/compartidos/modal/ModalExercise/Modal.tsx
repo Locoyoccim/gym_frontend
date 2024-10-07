@@ -15,9 +15,12 @@ function Modal({ modalState, setShowModal, name }: ModalProps2) {
   const { id_user } = useParams();
   const num_id: number = parseInt(id_user ?? "", 10);
   // Manejo del nombre ejercicio
-  const ExerciseData: exerciseProps[] = useContext(ExerciseNames);
+  const context = useContext(ExerciseNames);
+  const ExerciseData = context?.estado;
   const [inputValue, setInputValue] = useState<string>("");
-  const [filterData, setFilterData] = useState<exerciseProps[]>(ExerciseData);
+  const [filterData, setFilterData] = useState<exerciseProps[]>(
+    ExerciseData || []
+  );
   const [showOptions, setShowOptions] = useState<string>("");
 
   // Data de las series de acuerdo al nombre del ejercicio
@@ -57,7 +60,7 @@ function Modal({ modalState, setShowModal, name }: ModalProps2) {
           type="text"
           placeholder="ejercicio..."
           className="check_exercise"
-          onChange={(e) => getExerciseName(e, ExerciseData)}
+          onChange={(e) => getExerciseName(e, ExerciseData || [])}
           value={inputValue}
           name="exercise_name"
         />

@@ -1,5 +1,5 @@
 import "./confirmationModal.css";
-import BtnLoder from "../../Loader/BtnLoader";
+import BtnLoader from "../../Loader/BtnLoader";
 import { modalProps1 } from "../../../../interfaces"; 
 
 
@@ -25,7 +25,7 @@ function ConfirmationModal({
       <p className="modal_msj">{ModalMsj}</p>
       <div className="modalBtns">
         <button className="confirmationBtn" onClick={() => sendToBackend()}>
-          {!isLoading ? ConfirmationMsj : <BtnLoder />}
+          {!isLoading ? ConfirmationMsj : <BtnLoader />}
         </button>
         <button className="cancelBtn" onClick={() => setModalConfirmation("")}>
           {ReturnMsj}

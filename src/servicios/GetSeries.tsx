@@ -25,7 +25,7 @@ const GetSeries = (Endpoint: string, token: string) => {
 
   useEffect(() => {
     getFetch(Endpoint, token);
-  }, []);
+  }, [token]);
 
   return { data, error, getFetch };
 };

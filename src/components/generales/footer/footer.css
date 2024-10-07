@@ -18,11 +18,16 @@
 .finish_btn, .historia_btn{
     width: 90px;
     height: 35px;
-    padding: 5px 10px;
     background: var(--dark_red);
     border: none;
     border-radius: 10px;
     color: var(--text);
     font-size: 19px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bi-node-plus{
+    font-size: 38px;
 }

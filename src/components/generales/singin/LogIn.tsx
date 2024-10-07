@@ -9,10 +9,12 @@ import axios from "axios";
 import { Api_Url } from "../../../servicios/config";
 import { useAuth } from "../../compartidos/memoria/AuthProvider";
 import { functionLogin, changeEvent } from "../../../interfaces";
+import Notification from "../../compartidos/NotificationResponse/Notification";
 
 function SingIn({ windowChange }: functionLogin) {
   const navigate = useNavigate();
   const [IsLoading, setIsLoading] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [inputType, setInputType] = useState<string>("password");
   const { Login } = useAuth();
   const [SingInData, SetSingInData] = useState<userLogIn>({
@@ -25,10 +27,10 @@ function SingIn({ windowChange }: functionLogin) {
   };
 
   const InputData = (e: changeEvent, field: string) => {
-    SetSingInData({ ...SingInData, [field]: e.target.value });
+    SetSingInData({ ...SingInData, [field]: e.target.value.trim() });
   };
 
-  const SendDataBackEnd = async () => {
+  const SendDataBackEnd = () => {
     setIsLoading(true);
     axios
       .post(`${Api_Url}/log-in/`, SingInData)
@@ -38,14 +40,19 @@ function SingIn({ windowChange }: functionLogin) {
       })
       .catch((err) => {
         console.log(err);
+        setIsOpen(true);
       })
       .finally(() => {
         setIsLoading(false);
+        setTimeout(() => {
+          setIsOpen(false);
+        }, 3000);
       });
   };
 
   return (
     <section id="login_section">
+      <Notification tittle="correo/contraseña incorrecto" isOpen={isOpen} />
       {/* contenedor para iniciar sesión */}
       <div className="singin_container">
         <div className="img_singin">
