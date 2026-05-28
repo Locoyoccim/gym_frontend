@@ -52,7 +52,7 @@ function SingIn({ windowChange }: functionLogin) {
 
   return (
     <section id="login_section">
-      <Notification tittle="correo/contraseña incorrecto" isOpen={isOpen} />
+      <Notification tittle="Email o contraseña incorrectos" isOpen={isOpen} />
       {/* contenedor para iniciar sesión */}
       <div className="singin_container">
         <div className="img_singin">
@@ -94,13 +94,13 @@ function SingIn({ windowChange }: functionLogin) {
             }`}
             onClick={SendDataBackEnd}
           >
-            {!IsLoading ? <p>INICIAR SESIÓN</p> : <BtnLoader />}
+            {!IsLoading ? <p>Iniciar sesión</p> : <BtnLoader />}
           </button>
           <button
             className="create_acount_btn"
             onClick={() => windowChange("in")}
           >
-            NO TENGO CUENTA
+            Crear cuenta nueva
           </button>
         </div>
       </div>

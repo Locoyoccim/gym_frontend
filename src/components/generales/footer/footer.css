@@ -1,33 +1,58 @@
-@import url('./src/components/compartidos/colors.css');
+@import url('../../compartidos/colors.css');
 
-.footer{
-    display: flex;
-    background: var(--dark_red_light);
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
-    border: solid 1px var(--borders);
-    height: 60px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    margin-top: 70px;
-    overflow: hidden;
-    z-index: 3;
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-4);
+  height: 60px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--surface);
+  border-top: 1px solid var(--border-subtle);
+  z-index: 8;
 }
-.finish_btn, .historia_btn{
-    width: 90px;
-    height: 35px;
-    background: var(--dark_red);
-    border: none;
-    border-radius: 10px;
-    color: var(--text);
-    font-size: 19px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+.finish_btn {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  padding: 0 var(--space-4);
+  height: 38px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap;
 }
-.bi-node-plus{
-    font-size: 38px;
+.finish_btn:hover {
+  background: var(--accent-hover);
+}
+
+.historia_btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.historia_btn:hover {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.bi-node-plus {
+  font-size: 26px;
 }

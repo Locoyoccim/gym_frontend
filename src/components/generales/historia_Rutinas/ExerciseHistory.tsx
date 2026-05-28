@@ -5,6 +5,7 @@ import { ActualDate } from "../../compartidos/memoria/SelectDate";
 import { SerieContext } from "../../compartidos/memoria/SeriesContext";
 import { useParams } from "react-router-dom";
 import { CompleteSerie } from "../../../interfaces";
+import "./exerciseHistory.css";
 
 function ExerciseHistory() {
   const { id_user } = useParams<{ id_user: string }>();

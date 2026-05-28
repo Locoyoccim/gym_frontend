@@ -1,10 +1,40 @@
+:root {
+  /* ── Spacing ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
 
-:root{
-    --bg_card_gradient: linear-gradient(to bottom right, #ae2727, #cf3333, #000000, #000000);
-    --borders: #f6abab;
-    --dark_red: #cf3333;
-    --dark_red_light: #cf3333af;
-    --text: #fdf3f3;
-    --input: #374043;
-    --black: #000000;
+  /* ── Color surfaces ── */
+  --bg:            oklch(8%  0.006 62);
+  --surface:       oklch(13% 0.009 62);
+  --surface-high:  oklch(19% 0.011 62);
+  --border-subtle: oklch(24% 0.012 62);
+  --border:        oklch(32% 0.014 62);
+
+  /* ── Text ── */
+  --text:          oklch(92% 0.008 62);
+  --text-muted:    oklch(56% 0.010 62);
+
+  /* ── Accent: forge amber ── */
+  --accent:        oklch(70% 0.18  62);
+  --accent-hover:  oklch(76% 0.20  62);
+  --accent-dim:    oklch(32% 0.10  62);
+  --accent-text:   oklch(12% 0.008 62);
+
+  /* ── Typography ── */
+  --font-display: 'Chakra Petch', sans-serif;
+  --font-ui:      'Barlow', sans-serif;
+
+  /* ── Legacy aliases (keep existing @import references working) ── */
+  --bg_card_gradient: var(--surface);
+  --borders:          var(--border-subtle);
+  --dark_red:         var(--accent);
+  --dark_red_light:   var(--surface-high);
+  --input:            var(--surface-high);
+  --black:            var(--bg);
 }

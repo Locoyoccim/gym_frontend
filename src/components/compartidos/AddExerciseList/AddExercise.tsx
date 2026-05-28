@@ -25,19 +25,19 @@ function AddExercise() {
     <div id="formAddExercise">
       <i className="bi bi-cloud-plus-fill"></i>
       <label htmlFor="exerciseName">
-        Agregar Ejercicio:
+        Nombre del ejercicio
         <input
           type="text"
           id="exerciseName"
           name="exerciseName"
-          placeholder="Nombre del ejercicio:"
+          placeholder="ej: Press banca"
           onChange={(e) => handleChange(e)}
         />
       </label>
       <button onClick={sendToBackend}>
-        {isLoading ? <BtnLoader /> : "enviar"}
+        {isLoading ? <BtnLoader /> : "Agregar"}
       </button>
-      <Notification tittle={"Ejercicio Creado"} isOpen={isCreated}/>
+      <Notification tittle={"Ejercicio agregado"} isOpen={isCreated}/>
     </div>
   );
 }

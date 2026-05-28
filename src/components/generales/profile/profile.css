@@ -1,4 +1,4 @@
-@import url("./src/components/compartidos/colors.css");
+@import url("../../compartidos/colors.css");
 .profile_container {
   background: var(--bg_card_gradient);
   height: 78vh;

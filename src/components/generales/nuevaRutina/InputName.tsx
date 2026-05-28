@@ -96,12 +96,12 @@ function InputName({ index, getInputValues }: getInputValues) {
   }
 
   return (
-    <>
+    <article className="exercise-block">
       <Modal modalState={showModal} setShowModal={setShowModal} name={inputValue} />
       <label className="exercise_name">
         <input
           type="text"
-          placeholder="Nombre de ejercicio..."
+          placeholder="Buscar ejercicio"
           value={inputValue}
           onChange={(e) => {
             getInputValue(e, ExerciseData || []), exerciseOptions("display");
@@ -111,7 +111,6 @@ function InputName({ index, getInputValues }: getInputValues) {
           <i className="bi bi-clipboard-data-fill"></i>
         </button>
         <div className={`exercise_list ${exerciseList}`}>
-          {/* Regresa lista de ejercicios traída del BE */}
           {filterExerciseData.map((item) => (
             <p
               key={item.id}
@@ -133,18 +132,17 @@ function InputName({ index, getInputValues }: getInputValues) {
         <p>REC</p>
       </div>
       <label className="results_container">
-        <button className="nueva_rutina_btn">
-          <i
-            className="bi bi-plus-square icon_results"
-            onClick={addInputLine}
-          ></i>
-        </button>
-        <button className="remove_line" onClick={() => removeInputLine()}>
-          <i className="bi bi-dash-square"></i>
-        </button>
         {inputLines.map((input) => input)}
       </label>
-    </>
+      <div className="series-actions">
+        <button onClick={addInputLine} aria-label="Agregar serie">
+          <i className="bi bi-plus-square"></i>
+        </button>
+        <button onClick={removeInputLine} aria-label="Quitar serie">
+          <i className="bi bi-dash-square"></i>
+        </button>
+      </div>
+    </article>
   );
 }
 

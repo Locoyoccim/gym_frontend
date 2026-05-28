@@ -53,12 +53,12 @@ function Modal({ modalState, setShowModal, name }: ModalProps2) {
         <i className="bi bi-x"></i>
       </button>
       <div className="top">
-        <h2>revisa tu ultimo desempeño</h2>
+        <h2>Último desempeño</h2>
       </div>
       <form action="search" id="search_form">
         <input
           type="text"
-          placeholder="ejercicio..."
+          placeholder="Buscar ejercicio"
           className="check_exercise"
           onChange={(e) => getExerciseName(e, ExerciseData || [])}
           value={inputValue}

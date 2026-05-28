@@ -1,0 +1,8 @@
+@import url("../../compartidos/colors.css");
+
+#exercise_history {
+  padding: var(--space-4) 0 var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}

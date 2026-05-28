@@ -16,14 +16,14 @@ function MainPAge() {
           <img src={dumbbell} alt="dumbbell" />
         </div>
         <div className="description_container">
-          Elige la fecha del entrenamiento que deseas visualizar
+          Selecciona una fecha para ver tu historial
         </div>
         <div className="calendar">
         <Calendar_choice/>
         </div>
         <div className="button_navigation">
-          <button className="main_btn" > <Link to={`/exercise_history/${id_user}`}>Ir a ver</Link> </button>
-          <button className="main_btn"> <Link to={`/NuevaRutina/${id_user}`}>Nuevo Entrenamiento</Link> </button>
+          <button className="main_btn" > <Link to={`/exercise_history/${id_user}`}>Ver historial</Link> </button>
+          <button className="main_btn"> <Link to={`/NuevaRutina/${id_user}`}>Registrar entrenamiento</Link> </button>
           <button className="main_btn" > <Link to={`/profile/${id_user}`}>Mi Perfil</Link> </button>
           <button className="log_out" onClick={() => {Logout(), navigate('/')}}>
               Cerrar Sesión

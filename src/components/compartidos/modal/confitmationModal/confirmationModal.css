@@ -1,62 +1,99 @@
 @import url("../../colors.css");
 
 #modalConfirmation {
-  background: var(--bg_card_gradient);
+  background: var(--surface);
+  border: 1px solid var(--border);
   color: var(--text);
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  width: 90%;
-  height: 41vh;
-  min-height: max-content;
-  display: grid;
-  text-align: center;
-  row-gap: 10px;
-  padding: 0px 10px 15px;
-  z-index: 7;
-  border-radius: 24px;
-  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-/* controla la apertura y cierre del modal */
-#modalConfirmation.openConfirmation {
-  transform: translate(-50%, -50%) scale(1);
-  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-.bi-check-circle-fill{
-  font-size: 74px;
-  padding: 0;
-  margin: 0;
-}
-.modal_tittle,
-.modal_msj {
-  text-transform: uppercase;
-}
-.modal_msj{
-  font-size: 18px;
-}
-.modalBtns {
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  width: min(90%, 360px);
+  padding: var(--space-8) var(--space-6);
+  z-index: 40;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  text-align: center;
+  gap: var(--space-4);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.25s ease;
+  pointer-events: none;
 }
-.modalBtns button {
-  font-size: 20px;
-  padding: 10px 25px;
-  background: none;
-  border: none;
-  border-radius: 10px;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-  text-transform: capitalize;
+
+#modalConfirmation.openConfirmation {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
 }
-.modalBtns .confirmationBtn {
-  background: var(--dark_red);
+
+.bi-check-circle-fill {
+  font-size: 48px;
+  color: var(--accent);
+  padding: 0;
+  margin: 0;
+}
+
+.modal_tittle {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--text);
 }
+
+.modal_msj {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: var(--text-muted);
+  text-transform: none;
+  line-height: 1.5;
+  max-width: 28ch;
+}
+
+.modalBtns {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.modalBtns .confirmationBtn {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--accent-text);
+  border: none;
+  border-radius: 8px;
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.modalBtns .confirmationBtn:hover {
+  background: var(--accent-hover);
+}
+
 .modalBtns .cancelBtn {
-  background-color: var(--black);
-  border: solid 1px var(--dark_red);
-  color: var(--dark_red);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  background: none;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  color: var(--text-muted);
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.modalBtns .cancelBtn:hover {
+  border-color: var(--border);
+  color: var(--text);
 }

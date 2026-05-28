@@ -1,97 +1,190 @@
-@import url("./src/components/compartidos/colors.css");
+@import url("../../compartidos/colors.css");
+
+/* ── Exercise name search input ── */
 .exercise_name {
-  height: max-content;
-  width: 100%;
-  margin-bottom: 25px;
   position: relative;
+  display: block;
+  width: 100%;
 }
+
 .exercise_name input {
   width: 100%;
-  height: 55px;
-  padding-left: 20px;
-  text-transform: capitalize;
-  font-size: 20px;
-}
-input {
-  background: var(--dark_red_light);
+  height: 46px;
+  padding: 0 48px 0 var(--space-3);
+  background: var(--surface-high);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
   color: var(--text);
-  border: 2px solid var(--borders);
-  border-radius: 10px;
-  font-size: 18px;
+  font-family: var(--font-ui);
+  font-size: 15px;
+  font-weight: 500;
   outline: none;
+  transition: border-color 0.2s ease;
+  text-transform: capitalize;
+  z-index: auto;
+}
+
+.exercise_name input:focus {
+  border-color: var(--accent);
+}
+
+.exercise_name input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.history_display {
+  position: absolute;
+  top: 50%;
+  right: var(--space-3);
+  transform: translateY(-50%);
+  font-size: 20px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+  padding: 0;
+  z-index: 1;
+}
+.history_display:hover {
+  color: var(--accent);
+}
+
+/* ── Search results dropdown ── */
+.exercise_list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 100%;
+  background: var(--surface-high);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  z-index: 20;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.exercise_list.display {
+  max-height: 160px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.exercise_list p {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 500;
   color: var(--text);
-  z-index: -1;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background 0.15s ease, color 0.15s ease;
 }
-.results_container {
-  position: relative;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
+.exercise_list p:last-child {
+  border-bottom: none;
 }
-.remove_line i {
-  right: 15px;
-  top: 50px;
+.exercise_list p:hover {
+  background: var(--accent-dim);
+  color: var(--accent);
 }
-.icon_results {
-  right: 15px;
-  top: 10px;
-}
+
+/* ── Column headers row ── */
 .titles {
-  color: var(--text);
+  display: grid;
+  grid-template-columns: 28px 1fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: 0 2px;
 }
+
+.titles::before {
+  content: 'SET';
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.titles p {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  text-align: center;
+  width: auto;
+}
+
+/* ── Series rows container ── */
+.results_container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  counter-reset: set-counter;
+  position: static;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+/* ── In-block add/remove series buttons ── */
 .nueva_rutina_btn,
 .remove_line {
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 3;
+  align-self: center;
 }
-.titles,
-.results_container {
+
+.results_container > .nueva_rutina_btn,
+.results_container > .remove_line {
+  display: none;
+}
+
+/* ── Series action row at the bottom of each block ── */
+.series-actions {
   display: flex;
-  width: 100%;
+  gap: var(--space-3);
+  align-items: center;
+  padding-top: var(--space-1);
 }
-.results_container input {
-  width: 50px;
-  height: 40px;
-  text-align: center;
-}
-.titles p {
-  width: 50px;
-  text-align: center;
-  margin-right: 7px;
-}
-.exercise_list {
-  border: var(--borders) 0px solid;
-  position: absolute;
-  width: 100%;
-  height: 0;
-  margin-top: 10px;
-  color: var(--text);
-  text-align: center;
-  font-size: 25px;
-  background-color: var(--dark_red_light);
-  z-index: 4;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: 0.5s ease all;
-  text-transform: uppercase;
-}
-.exercise_list.display {
-  height: 150px;
-  transition: 0.5s ease all;
-  overflow-y: scroll;
-}
-.exercise_list p {
-  width: 100%;
-  height: auto;
-  border-bottom: 1px solid var(--text);
-}
-.history_display{
-  position: absolute;
-  top: 12px;
-  right: 15px;
-  font-size: 28px;
+
+.series-actions button {
   background: none;
   border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+  padding: var(--space-1);
+  border-radius: 6px;
+}
+.series-actions button:hover {
+  color: var(--accent);
+}
+
+/* ── inputs shared ── */
+input[type="number"],
+input[type="text"] {
+  background: var(--surface-high);
   color: var(--text);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+input:focus {
+  border-color: var(--accent);
 }

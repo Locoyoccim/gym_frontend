@@ -116,10 +116,10 @@ function NuevaRutina() {
   return (
     <>
       <ConfirmationModal
-        ModalTittle="gran entrenamiento"
-        ModalMsj="ahora solo envía tu rutina, disfruta el descanso y recuperación"
-        ConfirmationMsj="Enviar"
-        ReturnMsj="regresar"
+        ModalTittle="Buen trabajo"
+        ModalMsj="Guarda tu entrenamiento y descansa."
+        ConfirmationMsj="Guardar entrenamiento"
+        ReturnMsj="Seguir entrenando"
         sendToBackend={sendToBackend}
         ModalState={modalConfirmation}
         setModalConfirmation={setModalConfirmation}
@@ -128,11 +128,6 @@ function NuevaRutina() {
       <ModalTemplate isOpen={showModal} Element={AddExercise} />
       <Navbar />
       <section id="nueva_rutina">
-        <button
-          className="nueva_rutina_btn"
-          onClick={() => addInputExercise("add")}
-        ></button>
-        {/* se rederizar los inputs, inicial de 1 */}
         {inputExercise.map((input) => input)}
         <div className="btn_container">
           <button

@@ -1,52 +1,108 @@
-@import url("./src/components/compartidos/colors.css");
+@import url("../../compartidos/colors.css");
+
 #Exercise_display {
   width: 100%;
-  padding: 0 30px;
-  margin-bottom: 15px;
+  padding: 0 var(--space-4);
+  margin-bottom: var(--space-2);
 }
+
+/* ── Accordion card ── */
 .card_results {
-  padding: 10px;
-  background-color: var(--dark_red_light);
-  border-radius: 15px;
-  max-height: 55px;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
   overflow: hidden;
-  transition: all 0.5s ease;
+  display: grid;
+  grid-template-rows: auto 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
-.card_results.extend{
-  max-height: 220px;
-  transition: all 0.5s ease;
-  overflow: scroll;
-  scrollbar-width: none;
+
+.card_results.extend {
+  grid-template-rows: auto 1fr;
 }
+
+/* ── Card header ── */
 .tittle_card {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  gap: var(--space-3);
 }
-.results_details {
-  display: flex;
-  justify-content: space-around;
-  color: var(--text);
-  text-transform: uppercase;
-  text-align: center;
-}
-.results_details p {
-  width: 45px;
-}
+
 .card_name {
-  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: var(--text);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+
 .arrow_btn {
   border: none;
   background: none;
-  font-size: 28px;
+  color: var(--text-muted);
+  font-size: 16px;
   cursor: pointer;
-  transition: all .8s ease;
-  color: var(--text);
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
   transform: rotate(180deg);
 }
-.arrow_btn.turn{
-  transition: all .8s ease-in-out;
-  transform: rotate(-360deg);
+
+.arrow_btn.turn {
+  transform: rotate(0deg);
+  color: var(--accent);
+}
+
+/* ── Collapsible body ── */
+.card_results_container {
+  min-height: 0;
+  overflow: hidden;
+  counter-reset: set-counter;
+}
+
+.card_results.extend .card_results_container {
+  padding: 0 var(--space-4) var(--space-4);
+}
+
+/* ── Column header row inside card ── */
+.results_details {
+  display: grid;
+  grid-template-columns: 32px 1fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: var(--space-2) 0 var(--space-2);
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: var(--space-2);
+}
+
+.results_details::before {
+  content: 'SET';
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.results_details p {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  text-align: center;
+  width: auto;
 }

@@ -1,12 +1,50 @@
-.inputs_container{
-    width: auto;
-    display: flex;
-    row-gap: 15px;
-    z-index: 3;
+@import url("../../compartidos/colors.css");
+
+.inputs_container {
+  display: grid;
+  grid-template-columns: 28px 1fr 1fr 1fr 1fr;
+  align-items: center;
+  gap: var(--space-2);
+  counter-increment: set-counter;
 }
-.inputs_container input{
-    margin-right: 8px;
-    margin-top: 8px;
-    width: 50px;
-    height: 40px;
+
+.inputs_container::before {
+  content: counter(set-counter);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  text-align: center;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.inputs_container input {
+  width: 100%;
+  height: 38px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  background: var(--surface-high);
+  color: var(--text);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  margin: 0;
+  padding: 0;
+  -moz-appearance: textfield;
+}
+.inputs_container input::-webkit-outer-spin-button,
+.inputs_container input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.inputs_container input::placeholder {
+  color: var(--border);
+  font-weight: 400;
+}
+.inputs_container input:focus {
+  border-color: var(--accent);
 }

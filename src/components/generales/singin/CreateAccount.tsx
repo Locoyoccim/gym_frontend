@@ -101,7 +101,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
             required
           />
           <p className={`email_msj ${emailError}`}>
-            Introduzca un email valido
+            Ingresa un email válido (ej: nombre@correo.com)
           </p>
           {/* elección de contraseña */}
           <label htmlFor="password1">contraseña</label>
@@ -114,7 +114,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
           />
           <InputEye operation={changeType1} />
           <p className={`password_msj ${passwordError}`}>
-            la contraseña debe contener números, letras y un carácter especial
+            Mínimo 8 caracteres, una mayúscula, un número y un símbolo
           </p>
           {/* validación la contraseña */}
           <label htmlFor="password_confirmation">repite tu contraseña</label>
@@ -129,7 +129,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
           <p
             className={`confirmation_msj ${JSON.stringify(confirmationError)}`}
           >
-            las contraseñas no coinciden
+            Las contraseñas no coinciden
           </p>
           {/* captura de nombre de usuario */}
           <label htmlFor="user_name">nombre de usuario</label>
@@ -177,7 +177,7 @@ function CreateAccount({ windowChange, windowState }: Props) {
             className="create_acount_btn"
             onClick={() => windowChange("")}
           >
-            TENGO CUENTA
+            Ya tengo cuenta
           </button>
         </div>
       </section>
